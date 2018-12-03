@@ -1,0 +1,184 @@
+//main
+func input(_a: String)->String?{
+    print (\(a))
+    let b=readLine
+    return b
+}
+
+var main1 = ProtocoleMain()
+var main2 = ProtocoleMain()
+var pioche1 = ProtocolePioche ()
+var pioche2 = ProtocolePioche ()
+var royaume1 = ProtocoleRoyaume()
+var royaume2 = ProtocoleRoyaume()
+var champsdebataille1 = ProtocoleChampsDeBataille()
+var champsdebataille2 = ProtocoleChampsDeBataille()
+
+var choix:bool = true
+while choix {
+    var a=input("J1, choisissez le Roi A ou B (tapez A pour le Roi A et B pour le roi B)")
+    if a == "A" || a == "a"{
+        var roi1 = ProtocoleCarte("ROIA")
+        var roi2 = ProtocoleCarte("ROIB")
+        main1.ajouter(roi1)
+        main2.ajouter(roi2)
+        choix = false
+    }
+    else if a == "B" || a == "b"{
+        var roi1 = ProtocoleCarte("ROIB")
+        var roi2 = ProtocoleCarte("ROIA")
+        main1.ajouter(roi1)
+        main2.ajouter(roi2)
+        choix = false
+    }
+    else{
+        print("Veuillez tapez A ou B")
+    }
+}
+var c:ProtocoleCarte
+
+for i in 1...3{
+    c = pioche1.piocher()
+    guard c is Carte else{throw Probleme}
+    main1.ajouter(c)
+}
+
+for i in 1...3{
+    c = pioche2.piocher()
+    guard c is Carte else{throw Probleme}
+    main2.ajouter(c)
+}
+
+c = pioche1.piocher()
+guard c is Carte else{throw Probleme}
+royaume1.placer(c)
+
+c = pioche2.piocher()
+guard c is Carte else{throw Probleme}
+royaume2.placer(c)
+
+for i in main1{
+    print(i.afficher())
+}
+choix = true
+while choix{
+    a = input("Choisissez une carte dans votre main, J1")
+    for i in main1{
+        if i.afficher == a{
+            choix = false
+        }
+    }
+}
+c=main1.retirer(a)
+choix = true
+while choix{
+    a = input("choisissez une colonne (1 ou 2 ou 3), J1")
+    try? int(a){
+        var b = int(a)
+        if b >= 1 && b <=3{
+            choix = false
+        }
+    }
+}
+pos=Position(c,true, b)
+champsdebataille1.poser(pos)
+
+choix = true
+while choix{
+    a = input("Choisissez une carte dans votre main, J2")
+    for i in main2{
+        if i.afficher == a{
+            choix = false
+        }
+    }
+}
+c=main2.retirer(a)
+choix = true
+while choix{
+    a = input("choisissez une colonne (1 ou 2 ou 3), J2")
+    try? int(a){
+        var b = int(a)
+        if b >= 1 && b <=3{
+            choix = false
+        }
+    }
+}
+pos=ProtocolePosition(c,true, b)
+champsdebataille2.poser(pos)
+
+var jeu=true
+var tourdeJ1=true
+while jeu{
+    if tourdeJ1{
+        let d=pioche1.piocher()
+        if var c=d
+            main1.ajouter(c)
+            for i in champsdebataille1{
+                if var carte=i{
+                    i.redresser()
+
+                }
+            }
+            print ("Main de J1")
+            for i in main1{
+                print(i.afficher)
+            }
+            for e in champsdebataille1{
+
+
+            }
+            for e in champsdebataille2{
+
+            }
+            choix = true
+            while choix{
+                let a = input("0: Ne rien faire, 1: Déployer une unité, 2: Attaquer, J1")
+                try? let b=int(a){
+                    if b >= 0 && b <= 2{
+                        choix = false
+                    }
+                }
+            }
+            if b == 1{
+                choix = true
+                while choix{
+                    let a = input("Choisissez une carte dans votre main0; J1")
+                    for i in main1{
+                        if i.afficher == a{
+                            choix = false
+                        }
+                    }
+                }
+                c=main1.retirer(a)
+                choix = true
+                while choix{
+                    let a = input("choisissez une colonne (1 ou 2 ou 3); J1")
+                    try? int(a){
+                        var b = int(a)
+                        if b >= 1 && b <=3{
+                            choix = false
+                        }
+                    }
+                }
+                let col:Int = b
+                choix = true
+                while choix{
+                    let a = input("0: arriere, 1: front; J1")
+                    try? int(a){
+                        var  = int(a)
+                        if b >= 0 && b <=1 {
+                            choix = false
+                        }
+                    }
+                }
+                if b==0{
+                    let front: Bool = false
+                }
+                else{
+                    let front: Bool = true
+                }
+                pos=ProtocolePosition(c, front, col)
+
+            }
+    }
+}
