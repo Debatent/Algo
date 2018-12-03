@@ -1,9 +1,47 @@
 //main
-func input(_a: String)->String?{
-    print (\(a))
-    let b=readLine
+func inputint(_a: String,_valmin, _valmax)->Int{
+    var choix = true
+    while choix{
+        print (\(_a))
+        let b = readLine()
+        try? int(a){
+            let c = int(a)
+            if c >= _valmin && c <= _valmax{
+                choix = false
+            }
+        }
+    }
+    return c
+}
+
+func input_J1_main()->String{
+    var choix = true
+    while choix{
+        print ("Choisissez une carte dans votre main, J1")
+        let b = readLine()
+        for i in main1{
+            if i.afficher == b{
+                choix = false
+            }
+        }
+    }
     return b
 }
+
+func input_J2_main()->String{
+    var choix = true
+    while choix{
+        print ("Choisissez une carte dans votre main, J2")
+        let b = readLine()
+        for i in main2{
+            if i.afficher == b{
+                choix = false
+            }
+        }
+    }
+    return b
+}
+
 
 var main1 = ProtocoleMain()
 var main2 = ProtocoleMain()
@@ -60,49 +98,18 @@ royaume2.placer(c)
 for i in main1{
     print(i.afficher())
 }
-choix = true
-while choix{
-    a = input("Choisissez une carte dans votre main, J1")
-    for i in main1{
-        if i.afficher == a{
-            choix = false
-        }
-    }
-}
+
+a = input_J1_main()
 c=main1.retirer(a)
-choix = true
-while choix{
-    a = input("choisissez une colonne (1 ou 2 ou 3), J1")
-    try? int(a){
-        var b = int(a)
-        if b >= 1 && b <=3{
-            choix = false
-        }
-    }
-}
+
+var b = inputint("choisissez une colonne (1 ou 2 ou 3), J1", 1, 3)
 pos=Position(c,true, b)
 champsdebataille1.poser(pos)
 
-choix = true
-while choix{
-    a = input("Choisissez une carte dans votre main, J2")
-    for i in main2{
-        if i.afficher == a{
-            choix = false
-        }
-    }
-}
+a = input_J2_main()
 c=main2.retirer(a)
-choix = true
-while choix{
-    a = input("choisissez une colonne (1 ou 2 ou 3), J2")
-    try? int(a){
-        var b = int(a)
-        if b >= 1 && b <=3{
-            choix = false
-        }
-    }
-}
+
+b = input("choisissez une colonne (1 ou 2 ou 3), J2", 1, 3)
 pos=ProtocolePosition(c,true, b)
 champsdebataille2.poser(pos)
 
@@ -130,55 +137,37 @@ while jeu{
             for e in champsdebataille2{
 
             }
-            choix = true
-            while choix{
-                let a = input("0: Ne rien faire, 1: Déployer une unité, 2: Attaquer, J1")
-                try? let b=int(a){
-                    if b >= 0 && b <= 2{
-                        choix = false
-                    }
-                }
-            }
-            if b == 1{
-                choix = true
-                while choix{
-                    let a = input("Choisissez une carte dans votre main0; J1")
-                    for i in main1{
-                        if i.afficher == a{
-                            choix = false
-                        }
-                    }
-                }
-                c=main1.retirer(a)
-                choix = true
-                while choix{
-                    let a = input("choisissez une colonne (1 ou 2 ou 3); J1")
-                    try? int(a){
-                        var b = int(a)
-                        if b >= 1 && b <=3{
-                            choix = false
-                        }
-                    }
-                }
+
+
+            let action = inputint("0: Ne rien faire, 1: Déployer une unité, 2: Attaquer, J1",0 ,2)
+
+            if action == 1{//Premier choix: deployer une unité
+                a = input_J1_main()
+                c = main1.retirer(a)
+
+                b = inputint("choisissez une colonne (1 ou 2 ou 3); J1",1,3)
+
                 let col:Int = b
-                choix = true
-                while choix{
-                    let a = input("0: arriere, 1: front; J1")
-                    try? int(a){
-                        var  = int(a)
-                        if b >= 0 && b <=1 {
-                            choix = false
-                        }
-                    }
-                }
+
+                b = inputint("0: arriere, 1: front; J1",0,1)
+
                 if b==0{
                     let front: Bool = false
                 }
                 else{
                     let front: Bool = true
                 }
-                pos=ProtocolePosition(c, front, col)
-
+                pos=ProtocolePosition(front, col)
+                do try champsdebataille1.poser(c,pos){}
+                catch{
+                    let f=champsdebataille1.retirer(pos)
+                    royaume1.placer(f)
+                    champsdebataille1.poser(c,pos)
+                }
             }
+            else if action == 2 {
+                
+            }
+
     }
 }
