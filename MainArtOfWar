@@ -115,7 +115,9 @@ champsdebataille2.poser(pos)
 
 var jeu=true
 var tourdeJ1=true
+var attaque: bool
 while jeu{
+    attaque = true
     if tourdeJ1{
         let d=pioche1.piocher()
         if var c=d
@@ -166,8 +168,14 @@ while jeu{
                 }
             }
             else if action == 2 {
-                
-            }
+                while attaque{
+                    for i in champsdebataille1{    
+                        if var c = i.afficher{
 
+                        }
+                    }
+                }
+            }
+        }
     }
 }
