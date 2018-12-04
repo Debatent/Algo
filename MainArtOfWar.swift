@@ -1,11 +1,11 @@
 //main
-func inputint(_a: String,_valmin, _valmax)->Int{
+func inputint(_a: String,_valmin:Int, _valmax:Int)->Int{
     var choix = true
     while choix{
         print (\(_a))
         let b = readLine()
-        try? int(a){
-            let c = int(a)
+        try? int(b){
+            let c = int(b)
             if c >= _valmin && c <= _valmax{
                 choix = false
             }
@@ -51,10 +51,17 @@ var royaume1 = ProtocoleRoyaume()
 var royaume2 = ProtocoleRoyaume()
 var champsdebataille1 = ProtocoleChampsDeBataille()
 var champsdebataille2 = ProtocoleChampsDeBataille()
+var cimetiere1 = ProtocoleCimetiere()
+var cimetiere2 = ProtocoleCimetiere()
+
 
 var nom: String
+var pos1: ProtocolePosition()
+var pos2: ProtocolePosition()
+var c:ProtocoleCarte()
+var positionaportee: Bool
 
-var choix:bool = true
+var choix:Bool = true
 while choix {
     var a=input("J1, choisissez le Roi A ou B (tapez A pour le Roi A et B pour le roi B)")
     if a == "A" || a == "a"{
@@ -75,7 +82,7 @@ while choix {
         print("Veuillez tapez A ou B")
     }
 }
-var c:ProtocoleCarte
+
 
 for i in 1...3{
     c = pioche1.piocher()
@@ -105,15 +112,15 @@ a = input_J1_main()
 c=main1.retirer(a)
 
 var b = inputint("choisissez une colonne (1 ou 2 ou 3), J1", 1, 3)
-var pos=Position(c,true, b)
-champsdebataille1.poser(pos)
+pos=champsdebataille1.afficherposition(true, b)
+champsdebataille1.poser(c,pos1)
 
 a = input_J2_main()
 c=main2.retirer(a)
 
 b = input("choisissez une colonne (1 ou 2 ou 3), J2", 1, 3)
-pos=ProtocolePosition(c,true, b)
-champsdebataille2.poser(pos)
+pos1 = champsdebataille2.afficherposition(true,b)
+champsdebataille2.poser(c,pos1)
 
 var jeu=true
 var tourdeJ1=true
@@ -161,7 +168,7 @@ while jeu{
                 else{
                     let front: Bool = true
                 }
-                pos=ProtocolePosition(front, col)
+                pos1 = champsdebataille1.afficherposition(front, col)
                 do try champsdebataille1.poser(c,pos){}
                 catch{
                     let f=champsdebataille1.retirer(pos)
@@ -200,7 +207,20 @@ while jeu{
                         else{
                             front = true
                         }
-                        pos1=ProtocolePosition(front, col)
+                        pos1=champsdebataille1.afficherposition(front, col)
+
+                        for i in champsdebataille2{
+                            if c = i.afficher{
+                                if champsdebataille1.estAportee(p1 = pos1,C2 = champsdebataille2, p2 = i){
+                                    print (c.affichernom())
+                                    print ("Est Front:"\i.estfront())
+                                    print ("Colonne:"\i.getColonne())
+                                    print ("A attaqué:"\c.estRetournee())
+                                    ennemivalable.append[i]
+                                }
+                            }
+
+                        }
                         b = inputint("choisissez l'unité cible: colonne (1 ou 2 ou 3)",1,3)
                         col = b
                         b = inputint("0: arriere, 1: front",0,1)
@@ -210,7 +230,38 @@ while jeu{
                         else{
                             front = true
                         }
-                        
+                        pos2 = champsdebataille2.afficherposition(front, col)
+
+                        positionaportee = false
+                        for i in ennemivalable{
+                            if i == pos2{
+                                positionaportee = true
+                            }
+                        }
+                        if positionaportee{
+                            c = pos2.afficher()
+                            unite = pos1.afficher()
+                            if c.degatsCumules == 0{
+                                if c.estRetournee{
+                                    if unite.afficheattaque >= c.affichedefenseO{
+                                        if unite.afficheattaque == c.affichedefenseO{
+                                            c=champsdebataille2.retirer(pos2)
+                                            royaume1.placer(c)
+                                        }
+                                        else{
+                                            c=champsdebataille2.retirer(pos2)
+                                            cimetiere2.ajouter(c)
+                                        }
+                                        try? champsdebataille2.deplacer(pos2.getColonne())
+                                        if c.affichernom == "RoiA" or c.affichernom == "RoiB"{
+                                            print("Le Roi est mort")
+                                            jeu = false
+                                        }
+                                        else if ch
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
