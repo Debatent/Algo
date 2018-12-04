@@ -48,6 +48,9 @@ protocol ProtocoleCarte {
     //Retourne la valeur de la defense en position horizontale
     func affichedefenseO()-> Int
 
+    //Mode de la carte, 0 si verticale, 1 si horizontale
+    func estRetournee()->Bool
+
     //Remet la carte en mode vertical (au début du tour), remet à 0 degatsCumules
     mutating func redresser()
 
