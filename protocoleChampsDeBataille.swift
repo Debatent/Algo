@@ -30,6 +30,9 @@ protocol ProtocoleChampsDeBataille: Sequence {
     // Pre: 0<=colonne<=3
     mutating func deplacer(_colonne: Int) throws
 
+    // supprime la carte situé a la position _p1
+    mutating func supprimer(_p1: ProtocolePosition)
+
     //renvoie la position du champs de bataille lié à ces coordonnés
     //Pre: 1<=colonne<=3
     func afficherposition(_front: Bool, _colonne: Int)->ProtocolePosition
@@ -52,5 +55,6 @@ protocol ProtocoleChampsDeBataille: Sequence {
 
     // estVide: Renvoie true si le champs de bataille ne possède pas de carte
     func estVide()-> Bool
+
 
 }
