@@ -1,8 +1,8 @@
 import Foundation
 
 protocol ProtocoleChampsDeBataille: Sequence {
-    associatedtype IteratorChampsDeBatailleFront : IteratorProtocol where IteratorChampsDeBatailleFront.Element == ProtocolePosition 
-    associatedtype IteratorChampsDeBatailleArriere : IteratorProtocol where IteratorChampsDeBatailleArriere.Element == ProtocolePosition 
+    associatedtype IteratorChampsDeBataille : IteratorProtocol where IteratorChampsDeBataille.Element == ProtocolePosition 
+
 
     // Une position du champs de bataille
     var position: [ProtocolePosition] { get set } 
@@ -34,14 +34,15 @@ protocol ProtocoleChampsDeBataille: Sequence {
     // Post: true si il y a une carte, false sinon
     func checkCarte() -> Bool
 
+    // estAportee: ChampsDeBataille x Position x ChampsDeBataille x Position -> Bool
+    // à une position donnée et une position ciblée, au champs de bataille adverse, renvoie true si il y'a une carte à portée, false sinon.
+    // Pre: Position de départ p1, ChampsDeBataille que l'on veut cibler, Position à attaquer p2
+    // Post: true si il y a une carte a portée, false sinon
+    func estAportee(p1: ProtocolePosition, C2: ProtocoleChampsDeBataille, p2: ProtocolePosition) -> Bool
 
-   // makeIterator : ChampsDeBataille -> ItFront
+   // makeIterator : ChampsDeBataille -> ItChampsDeBataille
    // crée un itérateur sur la collection pour la parcourir dans l'ordre croissant des positions du front  
-    func makeItFront() -> IteratorChampsDeBatailleFront
-
-   // makeItArriere : ChampsDeBataille -> ItArriere
-   // crée un itérateur sur la collection pour la parcourir dans l'ordre croissant des positions de l'arrière
-    func makeItArriere() -> IteratorChampsDeBatailleArriere
+    func makeItFront() -> IteratorChampsDeBataille
 
 
 
