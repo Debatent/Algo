@@ -24,10 +24,11 @@ protocol ProtocoleChampsDeBataille: Sequence {
     // Pre: Carte qui correspond à la carte que l'on veut poser & Position qui correspond à la position à laquelle on veut poser la carte
     mutating func poser(c: ProtocoleCarte, p: ProtocolePosition) throws
 
-    // deplacer: ChampsDeBataille x Position x Position
-    // Déplace une carte présente sur le champs de bataille d'une position à une autre
-    // Pre: Position de départ p1 correspondant à la position où la carte est placée &  position de fin p2 correspondant à la position où l'on veut placer la carte
-    mutating func deplacer(p1: ProtocolePosition, p2: ProtocolePosition)
+    // deplacer: ChampsDeBataille x Int
+    // Déplace la carte présente sur le champs de bataille sur la colonne en parametre de l'arrière au front
+    // Renvoie une erreur si la position à l'arrière est vide
+    // Pre: 0<=colonne<=3
+    mutating func deplacer(_colonne: Int) throws
 
     //renvoie la position du champs de bataille lié à ces coordonnés
     //Pre: 1<=colonne<=3
