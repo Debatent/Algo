@@ -52,6 +52,8 @@ var royaume2 = ProtocoleRoyaume()
 var champsdebataille1 = ProtocoleChampsDeBataille()
 var champsdebataille2 = ProtocoleChampsDeBataille()
 
+var nom: String
+
 var choix:bool = true
 while choix {
     var a=input("J1, choisissez le Roi A ou B (tapez A pour le Roi A et B pour le roi B)")
@@ -103,7 +105,7 @@ a = input_J1_main()
 c=main1.retirer(a)
 
 var b = inputint("choisissez une colonne (1 ou 2 ou 3), J1", 1, 3)
-pos=Position(c,true, b)
+var pos=Position(c,true, b)
 champsdebataille1.poser(pos)
 
 a = input_J2_main()
@@ -169,10 +171,46 @@ while jeu{
             }
             else if action == 2 {
                 while attaque{
-                    for i in champsdebataille1{    
+                    print ("Champs de bataille de J1")
+                    for i in champsdebataille1{
                         if var c = i.afficher{
-
+                            if !c.estRetournee{
+                                print (c.affichernom())
+                                print ("Est Front:"\i.estfront())
+                                print ("Colonne:"i.getColonne())
+                            }
                         }
+                    }
+                    print ("Champs de bataille de J2")
+                    for i in champsdebataille2{
+                        if var c = i.afficher{
+                            print (c.affichernom())
+                            print ("Est Front:"\i.estfront())
+                            print ("Colonne:"\i.getColonne())
+                            print ("A attaqué:"\c.estRetournee())
+                        }
+                    }
+                    b = inputint("choisissez une unité qui va attaquer: colonne (1 ou 2 ou 3) ou tapez 0 pour arreter l'attaque; J1",0,3)
+                    if b != 0{
+                        col = b
+                        b = inputint("0: arriere, 1: front; J1",0,1)
+                        if b == 0{
+                            front = false
+                        }
+                        else{
+                            front = true
+                        }
+                        pos1=ProtocolePosition(front, col)
+                        b = inputint("choisissez l'unité cible: colonne (1 ou 2 ou 3)",1,3)
+                        col = b
+                        b = inputint("0: arriere, 1: front",0,1)
+                        if b == 0{
+                            front = false
+                        }
+                        else{
+                            front = true
+                        }
+                        
                     }
                 }
             }
