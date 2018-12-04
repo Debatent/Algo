@@ -39,6 +39,15 @@ protocol ProtocoleCarte {
     //Retourne les dégats qu'à subit une carte pendant 1 tour (est remis à 0 lorsque l'on redresse une carte)
     func degatsCumules() -> Int
 
+    //Retourne la valeur de l'attaque
+    func afficheattaque()-> Int
+
+    //Retourne la valeur de la defense en position verticale
+    func affichedefenseD()-> Int
+
+    //Retourne la valeur de la defense en position horizontale
+    func affichedefenseO()-> Int
+
     //Remet la carte en mode vertical (au début du tour), remet à 0 degatsCumules
     mutating func redresser()
 
