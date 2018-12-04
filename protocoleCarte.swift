@@ -51,6 +51,9 @@ protocol ProtocoleCarte {
     //Mode de la carte, 0 si verticale, 1 si horizontale
     func estRetournee()->Bool
 
+    //ajoute au degat cumulé la valeur a>=0
+    mutating func ajoutdegat(a:Int)
+
     //Remet la carte en mode vertical (au début du tour), remet à 0 degatsCumules
     mutating func redresser()
 
