@@ -50,5 +50,7 @@ protocol ProtocoleChampsDeBataille: Sequence {
     func makeItFront() -> IteratorChampsDeBataille
 
 
+    // estVide: Renvoie true si le champs de bataille ne possède pas de carte
+    func estVide()-> Bool
 
 }
