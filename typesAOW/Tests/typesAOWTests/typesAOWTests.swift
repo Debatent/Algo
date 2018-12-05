@@ -357,4 +357,15 @@ final class ProtocoleRoyaumeTests: XCTestCase {
 		R.placer(ProtocoleCarte"garde")
 		XCTAssertEqual(4, R.getnbCartes())
 	}
+
+    static var allTestsRoyaume = [
+        ("testInit", testInit),
+		("testVoirSuivant", testVoirSuivant),
+		("testPlacer", testPlacer),
+		("testRetirer", testRetirer),
+		("testgetnbArchers", testgetnbArchers),
+		("testgetnbGardes", testgetnbGardes),
+		("testgetnbSoldats", testgetnbSoldats),
+		("testgetnbCartes", testgetnbCartes)
+    ]
 }
