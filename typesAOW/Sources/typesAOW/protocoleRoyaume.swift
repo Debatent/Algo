@@ -14,7 +14,7 @@ protocol ProtocoleRoyaume {
     // placer: Royaume x Carte
     // Place une carte dans le royaume
     // Pre: la carte que l'on veut placer dans le royaume
-    mutating func placer(c: ProtocoleCarte)
+    mutating func placer(_c: ProtocoleCarte)
 
     //retirer: -> Carte | Vide
     // Retire une carte du royaume, ne renvoie rien si le royaume est vide
