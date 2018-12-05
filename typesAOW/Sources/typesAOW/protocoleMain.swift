@@ -15,13 +15,13 @@ protocol ProtocoleMain : Sequence {
     // ajouter: Main x Carte
     // Ajoute une carte à la main
     // Pre: Une Carte
-    mutating func ajouter(c: ProtocoleCarte)
+    mutating func ajouter(_c: ProtocoleCarte)
 
     // retirer: Main x String
     // Retire une carte de la main
     // Pre: le nom de la carte que l'on veut retirer
     // Post: la carte que l'on veut retirer
-    mutating func retirer(c: String) -> ProtocoleCarte
+    mutating func retirer(_c: String) -> ProtocoleCarte
 
     // afficher: -> String
     // Affiche la première carte présente dans la main
