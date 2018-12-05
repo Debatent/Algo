@@ -14,7 +14,7 @@ final class ProtocoleCarteTests: XCTestCase {
 		XCTAssertEqual(1, carte.afficheattaque())
 		XCTAssertEqual(4, carte.affichedefenseD())
 		XCTAssertEqual(4, carte.affichedefenseO())
-		XCTAssertEqual([true,true,true], carte.porteeCac)
+		XCTAssertEqual([true,true,true], carte.porteeCac,)
 		XCTAssertEqual([true,false,false], carte.porteeDist)
 	}
 
@@ -34,17 +34,17 @@ final class ProtocoleCarteTests: XCTestCase {
 	func testestRetournee() {
 		var carte1 = ProtocoleCarte("Garde")
 		carte1.redresser()
-		XCTAssertEqual(true, carte1.estRetournee())
-		carte1.retourner()
 		XCTAssertEqual(false, carte1.estRetournee())
+		carte1.retourner()
+		XCTAssertEqual(true, carte1.estRetournee())
 	}	
 
 	func testAjoutDegat() {
 		var carte1 = ProtocoleCarte("Garde")
 		carte1.ajoutDegat(2)
-		XCTAsserEqual(1, carte1.affichedefenseD)
+		XCTAsserEqual(1, carte1.affichedefenseD())
 		carte1.ajoutDegat(500)
-		XCTAsserEqual(0, carte1.affichedefenseD)
+		XCTAsserEqual(0, carte1.affichedefenseD())
 	}
 
 	func testRetourner() {
@@ -60,6 +60,16 @@ final class ProtocoleCarteTests: XCTestCase {
 		carte.redresser()
 		XCTAsserEqual()
 	}
+
+    static var allTestsCarte = [
+        ("testInit", testInit),
+		("testaffichernom", testaffichernom),
+		("testdegatsCumules", testdegatsCumules),
+		("testestRetournee", testestRetournee),
+		("testAjoutDegat", testAjoutDegat),
+		("testRetourner", testRetourner),
+		("testRedresser", testRedresser)
+    ]	
 
 }
 
@@ -150,6 +160,15 @@ final class ProtocoleChampsDeBatailleTests: XCTestCase {
 		XCTAssertEqual(false, C1.estVide())
 	}
 
+    static var allTestsChampsDeBataille = [
+        ("testInit", testInit),
+		("testSortir", testSortir),
+		("testPoser", testPoser),
+		("testDeplacer", testDeplacer),
+		("testSupprimer", testSupprimer),
+		("testestAportee", testestAportee),
+		("testestVide", testestVide)
+    ]
 }
 
 
@@ -166,6 +185,11 @@ final class ProtocoleCimetiereTests: XCTestCase {
 		C.ajouter(carte)
 		XCTAssertEqual(false, C.estVide())
 	}
+
+    static var allTestsCimetiere = [
+        ("testInit", testInit),
+		("testAjouter", testAjouter)
+    ]
 }
 
 final class ProtocoleMainTests: XCTestCase {
@@ -196,9 +220,15 @@ final class ProtocoleMainTests: XCTestCase {
 		M.ajouter(carte)
 		XCTAssertEqual(carte, M.afficher())		
 	}
+
+    static var allTestsMain = [
+        ("testInit", testInit),
+		("testRetirer", testRetirer),
+		("testAfficher", testAfficher)
+    ]
 }
 
-final class ProtocolePiocheTest: XCTestCase {
+final class ProtocolePiocheTests: XCTestCase {
 
 	func testInit() {
 		P = ProtocolePioche()
@@ -215,20 +245,31 @@ final class ProtocolePiocheTest: XCTestCase {
 		P = ProtocolePioche()
 		XCTAssertEqual(20, P.getnbCartes())
 	}
+
+    static var allTestsPioche = [
+        ("testInit", testInit),
+		("testPiocher", testPiocher),
+		("testgetnbCartes", testgetnbCartes)
+    ]
 }
 
-final class ProtocolePositionTest: XCTestCase {
+final class ProtocolePositionTests: XCTestCase {
 	
 	func testInit() {
+		C1 = ProtocoleChampsDeBataille()
+		carte = ProtocoleCarte("soldat")
 		p = ProtocolePosition()
-		carte = ProtocoleCarte
+		C1.placer(carte, p)		
+		p.front = true
+		p.colonne = 1
+		XCTAssertTrue(p is ProtocoleCarte())
 	}
 
 	func testAfficher() {
 		p = ProtocolePosition()
 		p.front = true
 		p.colonne = 1
-		XCTAsserEqual(false, p.afficher())
+		XCTAssertEqual(false, p.afficher())
 		C1 = ProtocoleChampsDeBataille()
 		C1.poser(ProtocoleCarte("soldat"), p)
 		XCTAssertEqual(true, p.afficher())
@@ -248,10 +289,17 @@ final class ProtocolePositionTest: XCTestCase {
 		p.colonne = 1
 		XCTAssertEqual(true, p.getColonne())
 	}
+
+    static var allTestsPosition = [
+        ("testInit", testInit),
+		("testAfficher", testAfficher),
+		("testEstFront", testEstFront),
+		("testgetColonne", testgetColonne)
+    ]
 	
 }
 
-final class ProtocoleRoyaume(): XCTestCase {
+final class ProtocoleRoyaumeTests: XCTestCase {
 	
 	func testInit() {
 		R = ProtocoleRoyaume()
@@ -280,28 +328,28 @@ final class ProtocoleRoyaume(): XCTestCase {
 		XCTAssertEqual(false, R.getnbCartes())
 	}
 
-	func getnbArchers() {
+	func testgetnbArchers() {
 		R = ProtocoleRoyaume()
 		R.placer(ProtocoleCarte("archer")
 		R.placer(ProtocoleCarte("archer")
 		XCTAssertEqual(2, R.getnbArchers())
 	}
 
-	func getnbGardes() {
+	func testgetnbGardes() {
 		R = ProtocoleRoyaume()
 		R.placer(ProtocoleCarte"garde")
 		R.placer(ProtocoleCarte"garde")
 		XCTAssertEqual(2, R.getnbGardes())
 	}
 
-	func getnbSoldats() {
+	func testgetnbSoldats() {
 		R = ProtocoleRoyaume()
 		R.placer(ProtocoleCarte"soldat")
 		R.placer(ProtocoleCarte"soldat")
 		XCTAssertEqual(2, R.getnbSoldats())
 	}
 
-	func getnbCartes() {
+	func testgetnbCartes() {
 		R = ProtocoleRoyaume()
 		R.placer(ProtocoleCarte"soldat")
 		R.placer(ProtocoleCarte"soldat")
@@ -309,17 +357,4 @@ final class ProtocoleRoyaume(): XCTestCase {
 		R.placer(ProtocoleCarte"garde")
 		XCTAssertEqual(4, R.getnbCartes())
 	}
-
-
-final class typesAOWTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(typesAOW().text, "Hello, World!")
-    }
-
-    static var allTests = [
-        ("testExample", testExample),
-    ]
 }
