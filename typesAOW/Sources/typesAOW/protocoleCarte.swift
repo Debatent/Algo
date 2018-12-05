@@ -11,7 +11,7 @@ protocol ProtocoleCarte {
     // Garde(attaque: 1, defenseD: 3, defenseO: 2, porteeCac: [1,0,0], porteeDist: [0,0,0])
     // Archer(attaque: 1, defenseD: 2, defenseO: 1, porteeCac:[0,0,1], porteeDist[0,1,0])
     // sinon la création échoue
-    init?(c: String)
+    init?(_c: String)
 
 
     //Points d'attaque d'une carte
@@ -52,7 +52,7 @@ protocol ProtocoleCarte {
     func estRetournee()->Bool
 
     //ajoute au degat cumulé la valeur a>=0
-    mutating func ajoutdegat(a:Int)
+    mutating func ajoutdegat(_a:Int)
 
     //Remet la carte en mode vertical (au début du tour), remet à 0 degatsCumules
     mutating func redresser()
