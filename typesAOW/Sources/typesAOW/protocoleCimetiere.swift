@@ -9,5 +9,5 @@ protocol ProtocoleCimetiere {
     // ajouter: Cimetiere x Carte
     // Ajoute une carte au cimetière
     // Pre: Carte qui représente la carte qu'on ajoute au cimetière
-    mutating func ajouter(c: ProtocoleCarte)
+    mutating func ajouter(_c: ProtocoleCarte)
 }
