@@ -15,7 +15,7 @@ protocol ProtocoleChampsDeBataille: Sequence {
     // Supprime une carte du champs de bataille, et retourne la carte en question à partir d'une position
     // Pre: Position qui correspond à la position où est la carte que l'on veut supprimer du champs de bataille
     // Post: la carte que l'on veut supprimer du champs de bataille
-    mutating func sortir(p: ProtocolePosition) -> ProtocoleCarte throws
+    mutating func sortir(p: ProtocolePosition) -> ProtocoleCarte
 
     // poser: ChampsDeBataille x Carte x Position
     // Ajoute une carte au champs de bataille à partir d'une position, une carte ne peut être posé à l'arrière à moins
@@ -30,15 +30,17 @@ protocol ProtocoleChampsDeBataille: Sequence {
     // Pre: 0<=colonne<=3
     mutating func deplacer(_colonne: Int) throws
 
+    // supprime la carte situé a la position _p1
+    mutating func supprimer(_p1: ProtocolePosition)
+
     //renvoie la position du champs de bataille lié à ces coordonnés
     //Pre: 1<=colonne<=3
     func afficherposition(_front: Bool, _colonne: Int)->ProtocolePosition
 
     // getCarte: -> Bool
     // Regarde si il y a une carte à cette position
-    // Pre: une position
     // Post: true si il y a une carte, false sinon
-    func checkCarte(p: Position) -> Bool
+    func checkCarte() -> Bool
 
     // estAportee: ChampsDeBataille x Position x ChampsDeBataille x Position -> Bool
     // à une position donnée et une position ciblée, au champs de bataille adverse, renvoie true si il y'a une carte à portée, false sinon.
@@ -53,5 +55,6 @@ protocol ProtocoleChampsDeBataille: Sequence {
 
     // estVide: Renvoie true si le champs de bataille ne possède pas de carte
     func estVide()-> Bool
+
 
 }
