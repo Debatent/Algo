@@ -1,4 +1,5 @@
 import Foundation
+import ProtocoleCarte
 
 protocol ProtocoleMain : Sequence {
     associatedtype IteratorMain : IteratorProtocol where IteratorMain.Element == ProtocoleCarte

@@ -33,25 +33,39 @@ protocol ProtocoleCarte {
     //Position de la carte, 0 si verticale, 1 si horizontale (après attaque), 0 par défaut
     var aAttaquer: Bool { get set }
 
+    //affichernom: -> String
     //Affiche le nom de la Carte
+    //Post: renvoie une chaîne de caractères contenant le nom de la carte 
     func affichernom()-> String
 
+    //degatsCumules: -> Int
     //Retourne les dégats qu'à subit une carte pendant 1 tour (est remis à 0 lorsque l'on redresse une carte)
+    //Post: le nombre de dégats subit en un tour
     func degatsCumules() -> Int
 
+    //afficheattaque: -> Int
     //Retourne la valeur de l'attaque
+    //Post: la valeur de l'attaque
     func afficheattaque()-> Int
 
+    //affichedefenseD: -> Int
     //Retourne la valeur de la defense en position verticale
+    //Post: la valeur de la défenseD
     func affichedefenseD()-> Int
 
+    //affichedefenseO: -> Int
     //Retourne la valeur de la defense en position horizontale
+    //Post: la valeur de la défenseO
     func affichedefenseO()-> Int
 
+    //estRetournee: -> Bool
     //Mode de la carte, 0 si verticale, 1 si horizontale
+    //Post: true si retournée, false sinon
     func estRetournee()->Bool
 
+    //ajoutdegat: -> Carte x Int
     //ajoute au degat cumulé la valeur a>=0
+    //Pre: le nombre de dégats que l'on veut infliger
     mutating func ajoutdegat(_a:Int)
 
     //Remet la carte en mode vertical (au début du tour), remet à 0 degatsCumules

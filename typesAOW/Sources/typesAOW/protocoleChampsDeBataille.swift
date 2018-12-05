@@ -1,4 +1,6 @@
 import Foundation
+import ProtocoleCarte
+import ProtocolePosition
 
 protocol ProtocoleChampsDeBataille: Sequence {
     associatedtype IteratorChampsDeBataille : IteratorProtocol where IteratorChampsDeBataille.Element == ProtocolePosition
