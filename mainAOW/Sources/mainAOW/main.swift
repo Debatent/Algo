@@ -153,12 +153,12 @@ func tour(mainjoueur: ProtocoleMain, champsjoueur: ProtocoleChampsDeBataille , r
         var attaque = true
         while attaque{
             appercu(main = main1, J = joueur)
-            }
             b = inputint("1: attaquer, 0:pour arreter l'attaque; " + joueur,0,1)
             if b == 1{
 
                 pos1 = choixposition(champs = champsjoueur, J = joueur)
                 print ("Ennemie à porté de la Carte")
+                var ennemivalable=[]
                 for i in champsadver{
                     if c = i.afficher{
                         if champsjoueur.estAportee(p1 = pos1,C2 = champsadver, p2 = i){
@@ -166,7 +166,7 @@ func tour(mainjoueur: ProtocoleMain, champsjoueur: ProtocoleChampsDeBataille , r
                             print ("Est Front:"\i.estfront())
                             print ("Colonne:"\i.getColonne())
                             print ("A attaqué:"\c.estRetournee())
-                            ennemivalable.append[i]
+                        ennemivalable.append(i)
                         }
                     }
 
@@ -233,7 +233,7 @@ func tour(mainjoueur: ProtocoleMain, champsjoueur: ProtocoleChampsDeBataille , r
             }
         }
     }
-    if !jeu{
+    if jeu{
         b = inputint("0: ne pas placer d'unité dans le royaume, 1: placer une unité",0,1)
         if mainjoueur.taille()>=6 || b == 1{
             a = input_main(main = mainjoueur, J = joueur )
@@ -329,8 +329,7 @@ var tourdeJ1=true
 var attaque: bool
 while jeu{
     if tourdeJ1{
-        let d=pioche1.piocher()
-        if var c=d
+        if let c = pioche1.piocher()
             main1.ajouter(c)
             roimort = tour(mainjoueur = main1, champsjoueur = champsdebataille1, royjoueur = royaume1, cimjoueur = cimetiere1, joueur = "J1", mainadver = main2, champsadver = champsdebataille2, royadver = royaume2, cimadver = cimetiere2, adver = "J2")
             if roimort{
@@ -345,8 +344,7 @@ while jeu{
 
 
     else{
-        let d = pioche2.piocher()
-        if var c = d
+        if let c =  pioche2.piocher()
             main2.ajouter(c)
             roimort = tour(mainjoueur = main2, champsjoueur = champsdebataille2, royjoueur = royaume2, cimjoueur = cimetiere2, joueur = "J2", mainadver = main1, champsadver = champsdebataille1, royadver = royaume1, cimadver = cimetiere1, adver = "J1")
             if roimort{
@@ -365,14 +363,16 @@ if roimort && !tourdeJ1{// on a atteint la fin du tour de J1
 else if roimort && tourdeJ1{
     print ("J2 a gagné")
 }
-print("Le royaume de J1 possède \(royaume1.getnbCartes())")
-print("Le royaume de J2 possède \(royaume2.getnbCartes())")
-if royaume1.getnbCartes() > royaume2.getnbCartes(){
-    print ("J1 a gagné")
-}
-else if royaume1.getnbCartes() < royaume2.getnbCartes(){
-    print ("J2 a gagné")
-}
-else {
-    print("C'est une égalité !")
+else{
+    print("Le royaume de J1 possède \(royaume1.getnbCartes())")
+    print("Le royaume de J2 possède \(royaume2.getnbCartes())")
+    if royaume1.getnbCartes() > royaume2.getnbCartes(){
+        print ("J1 a gagné")
+    }
+    else if royaume1.getnbCartes() < royaume2.getnbCartes(){
+        print ("J2 a gagné")
+    }
+    else {
+        print("C'est une égalité !")
+    }
 }
