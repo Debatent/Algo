@@ -5,14 +5,14 @@ protocol ProtocolePioche {
 
     // init: -> Pioche
     // Création de la pioche composée de 9 soldats, 6 gardes, 5 archers déposés aléatoirement
-    init() 
+    init()
 
-    // piocher: -> Carte | Vide
-    // Retourne une carte 
+    // piocher: Pioche -> (Carte | Vide)
+    // Retourne une carte
     // Post: la carte que l'on pioche
     func piocher() -> ProtocoleCarte?
 
-    // getnbCartes: -> Int
+    // getnbCartes: Pioche -> Int
     // Renvoie le nombre de cartes présentes dans la pioche
     // Post: le nombre de cartes dans la pioche
     func getnbCartes() -> Int

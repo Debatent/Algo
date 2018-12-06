@@ -8,7 +8,7 @@ protocol ProtocoleMain : Sequence {
     // Création de la main (vide)
     init()
 
-    // taille: -> Int
+    // taille: Main -> Int
     // Retourne le nombre de cartes dans la main
     // Post: le nombre de cartes dans la main
     func taille() -> Int
@@ -18,13 +18,13 @@ protocol ProtocoleMain : Sequence {
     // Pre: Une Carte
     mutating func ajouter(_c: ProtocoleCarte)
 
-    // retirer: Main x String
+    // retirer: Main x String-> String x Main
     // Retire une carte de la main
     // Pre: le nom de la carte que l'on veut retirer
     // Post: la carte que l'on veut retirer
     mutating func retirer(_c: String) -> ProtocoleCarte
 
-    // afficher: -> String
+    // afficher: Main-> String
     // Affiche la première carte présente dans la main
     // Post: le nom de la carte
     func afficher() -> ProtocoleCarte    //à définir

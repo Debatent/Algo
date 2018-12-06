@@ -10,33 +10,35 @@ protocol ProtocoleChampsDeBataille: Sequence {
     // Création du champs de bataille avec 6 positions: 3 Fronts et 3 Arrières (vide)
     init()
 
-    // sortir: ChampsDeBataille x Position
+    // sortir: ChampsDeBataille x Position -> ChampsDeBataille x Carte
     // Supprime une carte du champs de bataille, et retourne la carte en question à partir d'une position
     // Pre: Position qui correspond à la position où est la carte que l'on veut supprimer du champs de bataille
     // Post: la carte que l'on veut supprimer du champs de bataille
     mutating func sortir(_p: ProtocolePosition) -> ProtocoleCarte
 
-    // poser: ChampsDeBataille x Carte x Position
+    // poser: ChampsDeBataille x Carte x Position -> ChampsDeBataille
     // Ajoute une carte au champs de bataille à partir d'une position, une carte ne peut être posé à l'arrière à moins
     // qu'il y ait une carte posée au front correspondant, dans le cas échéant, la carte est posée au front. Si une carte est déjà présente à la position où
     //
     // Pre: Carte qui correspond à la carte que l'on veut poser & Position qui correspond à la position à laquelle on veut poser la carte
     mutating func poser(_c: ProtocoleCarte, _p: ProtocolePosition) throws
 
-    // deplacer: ChampsDeBataille x Int
+    // deplacer: ChampsDeBataille x Int -> ChampsDeBataille
     // Déplace la carte présente sur le champs de bataille sur la colonne en parametre de l'arrière au front
     // Renvoie une erreur si la position à l'arrière est vide
     // Pre: 0<=colonne<=3
     mutating func deplacer(_colonne: Int) throws
 
+    // supprimer: ChampsDeBataille x position -> ChampsDeBataille
     // supprime la carte situé a la position _p1
     mutating func supprimer(_p1: ProtocolePosition)
 
+    // afficherposition: ChampsDeBataille x Bool x Int -> Position
     //renvoie la position du champs de bataille lié à ces coordonnés
     //Pre: 1<=colonne<=3
     func afficherposition(_front: Bool, _colonne: Int)->ProtocolePosition
 
-    // getCarte: -> Bool
+    // getCarte: ChampsDeBataille-> Bool
     // Regarde si il y a une carte à cette position
     // Post: true si il y a une carte, false sinon
     func checkCarte() -> Bool
@@ -51,7 +53,7 @@ protocol ProtocoleChampsDeBataille: Sequence {
    // crée un itérateur sur la collection pour la parcourir dans l'ordre croissant des positions du front
     func makeItFront() -> IteratorChampsDeBataille
 
-
+    // estVide: ChampsDeBataille -> Bool
     // estVide: Renvoie true si le champs de bataille ne possède pas de carte
     func estVide()-> Bool
 
