@@ -6,9 +6,6 @@ protocol ProtocoleChampsDeBataille: Sequence {
     associatedtype IteratorChampsDeBataille : IteratorProtocol where IteratorChampsDeBataille.Element == ProtocolePosition
 
 
-    // Une position du champs de bataille
-    var position: [ProtocolePosition] { get set }
-
     // init: -> ChampsDeBataille
     // Création du champs de bataille avec 6 positions: 3 Fronts et 3 Arrières (vide)
     init()

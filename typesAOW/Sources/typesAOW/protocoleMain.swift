@@ -13,7 +13,7 @@ protocol ProtocoleMain : Sequence {
     // Post: le nombre de cartes dans la main
     func taille() -> Int
 
-    // ajouter: Main x Carte
+    // ajouter: Main x Carte -> Main
     // Ajoute une carte à la main
     // Pre: Une Carte
     mutating func ajouter(_c: ProtocoleCarte)

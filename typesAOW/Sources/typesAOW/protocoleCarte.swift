@@ -2,8 +2,14 @@ import Foundation
 
 protocol ProtocoleCarte {
 
-    // init : String -> (Carte | Vide)
-    // création d'une carte à partir d'un String
+    
+    // Indication:
+    //La portée est representé par un tableau de booléen de taille 3, La premiere valeur
+    // désigne si elle peut toucher la colonne du champs de bataille de l'unité qui attaque
+    // la deuxieme colonne si elle peut toucher les colonnes à sa droite et à sa gauche
+    // la troisieme colonne  si elle peut touùcher les colonne deux cases à droite et deux case à gauche
+
+
     // Pre: String représente le nom de la carte que l'on veut créer :
     // RoiA(attaque: 1, defenseD: 4, defenseO: 4, porteeCac:  [1,1,1], porteeDist: [1,0,0])
     // RoiB(attaque: 1, defenseD: 5, defenseO: 4, porteeCac: [1,1,1], porteeDist: [0,0,0])
@@ -14,28 +20,10 @@ protocol ProtocoleCarte {
     init?(_c: String)
 
 
-    //Points d'attaque d'une carte
-    var attaque: Int { get set }
-
-    //Points de défense en position verticale d'une carte
-    var defenseD: Int { get set }
-
-    //Points de défense en position horizontale d'une carte
-    var defenseO: Int { get set }
-
-    //Portée d'attaque au corps à corps d'une carte, taille maxi : 3
-    var porteeCac: [Bool] { get set }
-
-
-    //Portée d'attaque à distance d'une carte,  taille maxi : 3
-    var porteeDist: [Bool] { get set }
-
-    //Position de la carte, 0 si verticale, 1 si horizontale (après attaque), 0 par défaut
-    var aAttaquer: Bool { get set }
 
     //affichernom: -> String
     //Affiche le nom de la Carte
-    //Post: renvoie une chaîne de caractères contenant le nom de la carte 
+    //Post: renvoie une chaîne de caractères contenant le nom de la carte
     func affichernom()-> String
 
     //degatsCumules: -> Int
