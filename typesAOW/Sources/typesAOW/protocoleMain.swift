@@ -1,7 +1,7 @@
 import Foundation
-import ProtocoleCarte
 
-protocol ProtocoleMain : Sequence {
+
+public protocol ProtocoleMain : Sequence {
     associatedtype IteratorMain : IteratorProtocol where IteratorMain.Element == ProtocoleCarte
 
     // init: -> Main
@@ -16,13 +16,13 @@ protocol ProtocoleMain : Sequence {
     // ajouter: Main x Carte -> Main
     // Ajoute une carte à la main
     // Pre: Une Carte
-    mutating func ajouter(_c: ProtocoleCarte)
+    mutating func ajouter(_ c: ProtocoleCarte)
 
     // retirer: Main x String-> String x Main
     // Retire une carte de la main
     // Pre: le nom de la carte que l'on veut retirer
     // Post: la carte que l'on veut retirer
-    mutating func retirer(_c: String) -> ProtocoleCarte
+    mutating func retirer(_ c: String) -> ProtocoleCarte
 
     // afficher: Main-> String
     // Affiche la première carte présente dans la main

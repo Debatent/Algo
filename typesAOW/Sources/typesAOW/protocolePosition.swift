@@ -1,12 +1,13 @@
 import Foundation
-import ProtocoleCarte
 
-protocol ProtocolePosition {
+
+public protocol ProtocolePosition {
 
     // init: -> Carte | Vide
-    //pre: bool x Int -> Position
-    // Création d'une position (Front ou Arrière et colonne 1 , 2 ou 3)
-    init()
+    // Création d'une position (Front ou Arrière et colonne 1 , 2 ou 3) True = front False = Arrière
+    // col ne peut prendre que les valeurs 1,2 ou 3, et correspond aux colonnes du champs de bataille
+    // pre: bool x Int -> Position
+    init(_ pos: Bool, _ col: Int)
 
 
 

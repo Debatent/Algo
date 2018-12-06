@@ -1,7 +1,7 @@
 import Foundation
-import ProtocoleCarte
 
-protocol ProtocoleRoyaume {
+
+public protocol ProtocoleRoyaume {
 
     // init: -> Royaume
     // Création du Royaume (vide)
@@ -15,7 +15,7 @@ protocol ProtocoleRoyaume {
     // placer: Royaume x Carte -> Royaume
     // Place une carte dans le royaume
     // Pre: la carte que l'on veut placer dans le royaume
-    mutating func placer(_c: ProtocoleCarte)
+    mutating func placer(_ c: ProtocoleCarte)
 
     //retirer: Royaume-> (Carte | Vide)
     // Retire une carte du royaume, ne renvoie rien si le royaume est vide

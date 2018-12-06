@@ -1,11 +1,5 @@
 import XCTest
-@testable import ProtocoleCarte 
-@testable import ProtocoleChampsDeBataille 
-@testable import ProtocoleCimetiere 
-@testable import ProtocoleMain 
-@testable import ProtocolePioche 
-@testable import ProtocolePosition
-@testable import ProtocoleRoyaume
+import typesAOW
 
 final class ProtocoleCarteTests: XCTestCase {
 
@@ -14,7 +8,7 @@ final class ProtocoleCarteTests: XCTestCase {
 		XCTAssertEqual(1, carte.afficheattaque())
 		XCTAssertEqual(4, carte.affichedefenseD())
 		XCTAssertEqual(4, carte.affichedefenseO())
-		XCTAssertEqual([true,true,true], carte.porteeCac,)
+		XCTAssertEqual([true,true,true], carte.porteeCac)
 		XCTAssertEqual([true,false,false], carte.porteeDist)
 	}
 
@@ -24,7 +18,7 @@ final class ProtocoleCarteTests: XCTestCase {
 	}
 
 	func testdegatsCumules() {
-		var carte1 = ProtocoleCarte(nom: "Garde")
+		var carte1 = ProtocoleCarte("Garde")
 		carte1.ajoutDegats(1)
 		carte1.ajoutDegats(1)
 		XCTAssertEqual(2, carte1.degatsCumules())
@@ -42,15 +36,15 @@ final class ProtocoleCarteTests: XCTestCase {
 	func testAjoutDegat() {
 		var carte1 = ProtocoleCarte("Garde")
 		carte1.ajoutDegat(2)
-		XCTAsserEqual(1, carte1.affichedefenseD())
+		XCTAssertEqual(1, carte1.affichedefenseD())
 		carte1.ajoutDegat(500)
-		XCTAsserEqual(0, carte1.affichedefenseD())
+		XCTAssertEqual(0, carte1.affichedefenseD())
 	}
 
 	func testRetourner() {
 		var carte = ProtocoleCarte("Garde")
 		carte.retourner()
-		XCTAsserEqual(true, carte.estRetournee())
+		XCTAssertEqual(true, carte.estRetournee())
 	}
 
 	func testRedresser() {
@@ -58,7 +52,7 @@ final class ProtocoleCarteTests: XCTestCase {
 		carte.retourner()
 		carte.ajoutDegat(2)
 		carte.redresser()
-		XCTAsserEqual()
+		XCTAssertEqual(false, carte.estRetournee())
 	}
 
     static var allTestsCarte = [
@@ -76,19 +70,19 @@ final class ProtocoleCarteTests: XCTestCase {
 final class ProtocoleChampsDeBatailleTests: XCTestCase {
 	
 	func testInit() {
-		C1 = ProtocoleChampsDeBataille()
-		let i = 0
-		let erreur = 0
+		var C1 = ProtocoleChampsDeBataille()
+		var i = 0
+		var erreur = 0
 		for unePosition in C1.position {
-			let posF = "F"+i
-			let posA = "A"+i
+			var posF = "F"+i
+			var posA = "A"+i
 			if unePosition.estFront() {
 				if !(posF == unePosition.front + unePosition.getColonne()) {
-					erreur +=1		
+					erreur += 1		
 				}  
 			} else {
 				if !(posA == unePosition.front + unePosition.getColonne()) {
-					erreur +=1
+					erreur += 1
 				}
 			}
 			i += 1
@@ -97,33 +91,33 @@ final class ProtocoleChampsDeBatailleTests: XCTestCase {
 	}
 
 	func testSortir() {
-		C1 = ProtocoleChampsDeBataille()
-		carte = ProtocoleCarte("soldat")
-		p1 = ProtocolePosition(true, 1)
+		var C1 = ProtocoleChampsDeBataille()
+		var carte = ProtocoleCarte("soldat")
+		var p1 = ProtocolePosition(true, 1)
 		C1.poser(c: carte, p: p1)	
-		let carte1 = C1.sortir(p1)
+		var carte1 = C1.sortir(p1)
 		XCTAssertEqual(false, C1.checkCarte(p1))
 		XCTAssertEqual(carte, carte1)
-		XCTAssertEqual("Exception", checkCarte(ProtocolePosition(false,1)))
+		XCTAssertEqual("Exception", C1.checkCarte(ProtocolePosition(false,1)))
 	}
 	
 	func testPoser() {
-		C1 = ProtocoleChampsDeBataille()
-		carte = ProtocoleCarte("soldat")
-		p1 = ProtocolePosition(false, 1)	
-		C1.poser(c: carte, p: p1) //Impossible de la placer à l'arrière car il n'y a pas de carte, elle est donc placée au front.
-		XCTAssertEqual(true, C1.checkCarte(ProtocolePosition(true,1))
-		C1.poser(c: ProtocoleCarte("soldat"), ProtocolePosition(false,1))
-		XCTAssertEqual(false, C1.checkCarte(ProtocolePosition(false,1))
-		XCTAsserEqual(false, C1.checkCarte(ProtocolePosition(false,0)))
+		var C1 = ProtocoleChampsDeBataille()
+		var carte = ProtocoleCarte("soldat")
+		var p1 = ProtocolePosition(false, 1)	
+		C1.poser(carte, p1) //Impossible de la placer à l'arrière car il n'y a pas de carte, elle est donc placée au front.
+		XCTAssertEqual(true, C1.checkCarte(ProtocolePosition(true,1)))
+		C1.poser(ProtocoleCarte("soldat"), ProtocolePosition(false,1))
+		XCTAssertEqual(false, C1.checkCarte(ProtocolePosition(false,1)))
+		XCTAssertEqual(false, C1.checkCarte(ProtocolePosition(false,0)))
 	}
 
 	func testDeplacer() {
-		C1 = ProtocoleChampsDeBataille()
-		carte1 = ProtocoleCarte("soldat")
-		carte2 = ProtocoleCarte("soldat")
-		p1 = ProtocolePosition(false, 1)	
-		p2 = ProtocolePosition(true, 1)
+		var C1 = ProtocoleChampsDeBataille()
+		var carte1 = ProtocoleCarte("soldat")
+		var carte2 = ProtocoleCarte("soldat")
+		var p1 = ProtocolePosition(false, 1)	
+		var p2 = ProtocolePosition(true, 1)
 		C1.poser(carte1, p1)
 		C1.poser(carte2, p2)
 		carte1.ajouterDegats(12)
@@ -134,27 +128,27 @@ final class ProtocoleChampsDeBatailleTests: XCTestCase {
 	}
 
 	func testSupprimer() {
-		C1 = ProtocoleChampsDeBataille()
-		carte = ProtocoleCarte("soldat")
-		p1 = ProtocolePosition(true, 1)	
+		var C1 = ProtocoleChampsDeBataille()
+		var carte = ProtocoleCarte("soldat")
+		var p1 = ProtocolePosition(true, 1)	
 		C1.poser(carte, p1)
 		C1.supprimer(p1)
 		XCTAssertEqual(false, C1.checkCarte(p1))		
 	}
 
 	func testestAportee() {
-		C1 = ProtocoleChampsDeBataille()
-		C2 = ProtocoleChampsDeBataille()
-		carte = ProtocoleCarte("soldat")
-		p1 = ProtocolePosition(true, 1)
-		p2 = ProtocolePosition(true, 1)	
+		var C1 = ProtocoleChampsDeBataille()
+		var C2 = ProtocoleChampsDeBataille()
+		var carte = ProtocoleCarte("soldat")
+		var p1 = ProtocolePosition(true, 1)
+		var p2 = ProtocolePosition(true, 1)	
 		C1.poser(carte, p1)
 		C2.poser(carte, p2)
 		XCTAssertEqual(true,C1.estAportee(p1, C2, p2))
 	}
 
 	func testestVide() {
-		C1 = ProtocoleChampsDeBataille()
+		var C1 = ProtocoleChampsDeBataille()
 		XCTAssertEqual(true, C1.estVide())
 		C1.poser(ProtocoleCarte("soldat"), ProtocolePosition(true,1))
 		XCTAssertEqual(false, C1.estVide())
@@ -175,13 +169,13 @@ final class ProtocoleChampsDeBatailleTests: XCTestCase {
 final class ProtocoleCimetiereTests: XCTestCase {
 	
 	func testInit() {
-		C = ProtocoleCimetiere()
+		var C = ProtocoleCimetiere()
 		XCTAssertEqual(true, C.estVide())
 	}
 
 	func testAjouter() {
-		C = ProtocoleCimetiere()
-		carte = ProtocoleCarte("soldat")
+		var C = ProtocoleCimetiere()
+		var carte = ProtocoleCarte("soldat")
 		C.ajouter(carte)
 		XCTAssertEqual(false, C.estVide())
 	}
@@ -195,28 +189,28 @@ final class ProtocoleCimetiereTests: XCTestCase {
 final class ProtocoleMainTests: XCTestCase {
 	
 	func testInit() {
-		M = ProtocoleMain()
+		var M = ProtocoleMain()
 		XCTAssertEqual(false, M.taille())
 	}
 
 	func testAjouter() {
-		M = ProtocoleMain()
-		carte = ProtocoleCarte("soldat")
+		var M = ProtocoleMain()
+		var carte = ProtocoleCarte("soldat")
 		M.ajouter(carte)
 		XCTAssertEqual(carte, M.afficher())
 	}
 
 	func testRetirer() {
-		M = ProtocoleMain()
-		carte = ProtocoleCarte("soldat")
+		var M = ProtocoleMain()
+		var carte = ProtocoleCarte("soldat")
 		M.ajouter(carte)
 		let c = M.retirer("soldat")
 		XCTAssertEqual(carte, c)
 	}
 
 	func testAfficher() {
-		M = ProtocoleMain()
-		carte = ProtocoleCarte("soldat")
+		var M = ProtocoleMain()
+		var carte = ProtocoleCarte("soldat")
 		M.ajouter(carte)
 		XCTAssertEqual(carte, M.afficher())		
 	}
@@ -231,18 +225,18 @@ final class ProtocoleMainTests: XCTestCase {
 final class ProtocolePiocheTests: XCTestCase {
 
 	func testInit() {
-		P = ProtocolePioche()
+		var P = ProtocolePioche()
 		XCTAssertEqual(20, P.getnbCartes())
 	}
 
 	func testPiocher() {
-		P = ProtocolePioche()
+		var P = ProtocolePioche()
 		let carte = P.piocher()
 		XCTAssertEqual(ProtocoleCarte, carte)
 	}
 
 	func testgetnbCartes() {
-		P = ProtocolePioche()
+		var P = ProtocolePioche()
 		XCTAssertEqual(20, P.getnbCartes())
 	}
 
@@ -256,37 +250,29 @@ final class ProtocolePiocheTests: XCTestCase {
 final class ProtocolePositionTests: XCTestCase {
 	
 	func testInit() {
-		C1 = ProtocoleChampsDeBataille()
-		carte = ProtocoleCarte("soldat")
-		p = ProtocolePosition()
+		var C1 = ProtocoleChampsDeBataille()
+		var carte = ProtocoleCarte("soldat")
+		var p = ProtocolePosition(true, 1)
 		C1.placer(carte, p)		
-		p.front = true
-		p.colonne = 1
-		XCTAssertTrue(p is ProtocoleCarte())
+		XCTAssertTrue(p is ProtocoleCarte)
 	}
 
 	func testAfficher() {
-		p = ProtocolePosition()
-		p.front = true
-		p.colonne = 1
+		var p = ProtocolePosition(true, 1)
 		XCTAssertEqual(false, p.afficher())
-		C1 = ProtocoleChampsDeBataille()
+		var C1 = ProtocoleChampsDeBataille()
 		C1.poser(ProtocoleCarte("soldat"), p)
 		XCTAssertEqual(true, p.afficher())
 		
 	}
 
 	func testEstFront() {
-		p = ProtocolePosition()
-		p.front = 1
-		p.colonne = 1	
+		var p = ProtocolePosition(true, 1)
 		XCTAssertEqual(true, p.estFront())	
 	}
 
 	func testgetColonne() {
-		p = ProtocolePosition()
-		p.front = 1
-		p.colonne = 1
+		var p = ProtocolePosition(true, 1)
 		XCTAssertEqual(true, p.getColonne())
 	}
 
@@ -302,59 +288,59 @@ final class ProtocolePositionTests: XCTestCase {
 final class ProtocoleRoyaumeTests: XCTestCase {
 	
 	func testInit() {
-		R = ProtocoleRoyaume()
+		var R = ProtocoleRoyaume()
 		XCTAssertEqual(0, R.getnbCartes())
 	}
 	
 	func testVoirSuivant() {
-		R = ProtocoleRoyaume()
+		var R = ProtocoleRoyaume()
 		XCTAssertEqual(nil, R.VoirSuivant())
-		carte = ProtocoleCarte("soldat")
+		var carte = ProtocoleCarte("soldat")
 		R.placer(carte)
 		XCTAssertEqual(carte, R.VoirSuivant())
 		
 	}
 
 	func testPlacer() {
-		R = ProtocoleRoyaume()
-		R.placer(c: ProtocoleCarte("soldat"))
+		var R = ProtocoleRoyaume()
+		R.placer(ProtocoleCarte("soldat"))
 		XCTAssertEqual(ProtocoleCarte("soldat"), R.VoirSuivant())
 	}
 
 	func testRetirer() {
-		R = ProtocoleRoyaume()
-		R.placer(c: ProtocoleCarte("soldat")
+		var R = ProtocoleRoyaume()
+		R.placer(ProtocoleCarte("soldat"))
 		XCTAssertEqual(ProtocoleCarte("soldat"), R.retirer())
 		XCTAssertEqual(false, R.getnbCartes())
 	}
 
 	func testgetnbArchers() {
-		R = ProtocoleRoyaume()
-		R.placer(ProtocoleCarte("archer")
-		R.placer(ProtocoleCarte("archer")
+		var R = ProtocoleRoyaume()
+		R.placer(ProtocoleCarte("archer"))
+		R.placer(ProtocoleCarte("archer"))
 		XCTAssertEqual(2, R.getnbArchers())
 	}
 
 	func testgetnbGardes() {
-		R = ProtocoleRoyaume()
-		R.placer(ProtocoleCarte"garde")
-		R.placer(ProtocoleCarte"garde")
+		var R = ProtocoleRoyaume()
+		R.placer(ProtocoleCarte("garde"))
+		R.placer(ProtocoleCarte("garde"))
 		XCTAssertEqual(2, R.getnbGardes())
 	}
 
 	func testgetnbSoldats() {
-		R = ProtocoleRoyaume()
-		R.placer(ProtocoleCarte"soldat")
-		R.placer(ProtocoleCarte"soldat")
+		var R = ProtocoleRoyaume()
+		R.placer(ProtocoleCarte("soldat"))
+		R.placer(ProtocoleCarte("soldat"))
 		XCTAssertEqual(2, R.getnbSoldats())
 	}
 
 	func testgetnbCartes() {
-		R = ProtocoleRoyaume()
-		R.placer(ProtocoleCarte"soldat")
-		R.placer(ProtocoleCarte"soldat")
-		R.placer(ProtocoleCarte"garde")
-		R.placer(ProtocoleCarte"garde")
+		var R = ProtocoleRoyaume()
+		R.placer(ProtocoleCarte("soldat"))
+		R.placer(ProtocoleCarte("soldat"))
+		R.placer(ProtocoleCarte("garde"))
+		R.placer(ProtocoleCarte("garde"))
 		XCTAssertEqual(4, R.getnbCartes())
 	}
 

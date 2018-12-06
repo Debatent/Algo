@@ -1,7 +1,7 @@
 import Foundation
-import ProtocoleCarte
 
-protocol ProtocolePioche {
+
+public protocol ProtocolePioche {
 
     // init: -> Pioche
     // Création de la pioche composée de 9 soldats, 6 gardes, 5 archers déposés aléatoirement
