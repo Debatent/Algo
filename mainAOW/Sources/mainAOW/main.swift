@@ -1,6 +1,6 @@
 import typesAOW
 //main
-func inputint(_a: String,_valmin:Int, _valmax:Int)->Int{
+func inputint(_a: String,_valmin:Int, _valmax:Int)->Int{// Test si ce que l'utilisateur a entré est compris entre valmin et valmax
     var choix = true
     while choix{
         print (\(_a))
@@ -15,14 +15,14 @@ func inputint(_a: String,_valmin:Int, _valmax:Int)->Int{
     return c
 }
 
-func input_main(main:ProtocoleMain, J:String )->String{
+func input_main(main:ProtocoleMain, J:String )->String{//Choix d'une carte dans la main
     var choix = true
     while choix{
         print (J)
         print ("Choisissez une carte dans votre main")
         let b = readLine()
         for i in main{
-            if i.afficher == b{
+            if i.affichernom() == b{
                 choix = false
             }
         }
@@ -32,7 +32,7 @@ func input_main(main:ProtocoleMain, J:String )->String{
 
 
 
-func choixposition(carte:ProtocoleCarte,champs:ProtocoleChampsDeBataille J:String){
+func choixposition(champs:ProtocoleChampsDeBataille J:String){
     var b: Int
     b = inputint("Choisissez une colonne (1 ou 2 ou 3), " + J,1,3)
 
@@ -146,7 +146,7 @@ func tour(mainjoueur: ProtocoleMain, champsjoueur: ProtocoleChampsDeBataille , r
             print("Unité placé dans le Royaume")
             let f=champsjoueur.retirer(pos1)
             royaume1.placer(f)
-            champsjoueur.poser(c,pos1)
+            champsjoueur.poser(c,pos1,royjoueur)
         }
     }
     else if action == 2 {
@@ -206,7 +206,7 @@ func tour(mainjoueur: ProtocoleMain, champsjoueur: ProtocoleChampsDeBataille , r
                         print("L'ennemie prend \(unite.attaque) dégats")
                         c.ajoutdegat(unite.attaque)
                         champsadver.supprimer(pos2)
-                        champsadver.poser(c,pos2)
+                        champsadver.poser(c,pos2,royadver)
                     }
                     if ennemie_abbatu{
                         try? champsadver.deplacer(pos2.getColonne()){}
