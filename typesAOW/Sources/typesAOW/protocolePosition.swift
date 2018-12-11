@@ -3,8 +3,8 @@ import Foundation
 
 public protocol ProtocolePosition {
 
-    // init: -> Carte | Vide
-    // Création d'une position (Front ou Arrière et colonne 1 , 2 ou 3) True = front False = Arrière
+    // init: -> Position
+    // Création d'une position Vide (Front ou Arrière et colonne 1 , 2 ou 3) True = front False = Arrière
     // col ne peut prendre que les valeurs 1,2 ou 3, et correspond aux colonnes du champs de bataille
     // pre: bool x Int -> Position
     init(_ pos: Bool, _ col: Int)
@@ -13,7 +13,7 @@ public protocol ProtocolePosition {
 
     // afficher: Position -> Carte
     // Retourne la carte placée à une position, ou renvoie vide si il n'y a pas de carte placée à cette position
-    // Post: la carte que l'on veut afficher
+    // Post: la carte que l'on veut afficher ou Vide
     func afficher() -> ProtocoleCarte?
 
     // estFront: Position-> Bool

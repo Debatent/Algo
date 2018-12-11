@@ -17,7 +17,7 @@ public protocol ProtocoleCarte {
     // Garde(attaque: 1, defenseD: 3, defenseO: 2, porteeCac: [1,0,0], porteeDist: [0,0,0])
     // Archer(attaque: 1, defenseD: 2, defenseO: 1, porteeCac:[0,0,1], porteeDist[0,1,0])
     // sinon la création échoue
-    init?(_ c: String)
+    init(_ c: String)
 
 
 

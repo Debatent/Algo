@@ -9,7 +9,7 @@ public protocol ProtocolePioche {
 
     // piocher: Pioche -> (Carte | Vide)
     // Retourne une carte
-    // Post: la carte que l'on pioche
+    // Post: la carte que l'on pioche ou Vide si il n'y a plus de cartes
     func piocher() -> ProtocoleCarte?
 
     // getnbCartes: Pioche -> Int

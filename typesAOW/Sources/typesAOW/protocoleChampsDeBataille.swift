@@ -19,9 +19,9 @@ public protocol ProtocoleChampsDeBataille: Sequence {
     // poser: ChampsDeBataille x Carte x Position -> ChampsDeBataille
     // Ajoute une carte au champs de bataille à partir d'une position, une carte ne peut être posé à l'arrière à moins
     // qu'il y ait une carte posée au front correspondant, dans le cas échéant, la carte est posée au front. Si une carte est déjà présente à la position où
-    //
+    // on veut poser la carte, l'ancienne carte est envoyé dans le Royaume, et la nouvelle Carte prend sa place
     // Pre: Carte qui correspond à la carte que l'on veut poser & Position qui correspond à la position à laquelle on veut poser la carte
-    mutating func poser(_ c: ProtocoleCarte, _p: ProtocolePosition) throws
+    mutating func poser(_ c: ProtocoleCarte, _ p: ProtocolePosition, _ r: ProtocoleRoyaume) throws
 
     // deplacer: ChampsDeBataille x Int -> ChampsDeBataille
     // Déplace la carte présente sur le champs de bataille sur la colonne en parametre de l'arrière au front
@@ -38,16 +38,11 @@ public protocol ProtocoleChampsDeBataille: Sequence {
     //Pre: 1<=colonne<=3
     func afficherposition(_ front: Bool, _ colonne: Int)->ProtocolePosition
 
-    // getCarte: ChampsDeBataille-> Bool
-    // Regarde si il y a une carte à cette position
-    // Post: true si il y a une carte, false sinon
-    func checkCarte() -> Bool
-
     // estAportee: ChampsDeBataille x Position x ChampsDeBataille x Position -> Bool
     // à une position donnée et une position ciblée, au champs de bataille adverse, renvoie true si il y'a une carte à portée, false sinon.
     // Pre: Position de départ p1, ChampsDeBataille que l'on veut cibler, Position à attaquer p2
     // Post: true si il y a une carte a portée, false sinon
-    func estAportee(_ p1: ProtocolePosition, _ C2: CDB2, _p2: ProtocolePosition) -> Bool
+    func estAportee(_ p1: ProtocolePosition, _ C2: CDB2, _ p2: ProtocolePosition) -> Bool
 
    // makeIterator : ChampsDeBataille -> ItChampsDeBataille
    // crée un itérateur sur la collection pour la parcourir dans l'ordre croissant des positions du front

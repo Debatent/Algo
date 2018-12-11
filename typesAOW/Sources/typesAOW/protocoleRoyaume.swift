@@ -8,7 +8,8 @@ public protocol ProtocoleRoyaume {
     init()
 
     // voirSuivant: Royaume-> (Carte | Vide)
-    // Renvoie la prochaine carte que l'on va tirer ou rien si le royaume est vide
+    // Renvoie la prochaine carte que l'on va tirer ou rien si le royaume est videCarte | Vide
+    // On renvoie la carte la plus ancienne
     // Post: la première carte disponible dans le royaume
     func voirSuivant() -> ProtocoleCarte?
 
@@ -18,7 +19,7 @@ public protocol ProtocoleRoyaume {
     mutating func placer(_ c: ProtocoleCarte)
 
     //retirer: Royaume-> (Carte | Vide)
-    // Retire une carte du royaume, ne renvoie rien si le royaume est vide
+    // Retire la carte la plus ancienne du royaume, renvoie Vide si le royaume est vide
     // Post: la carte que l'on veut retirer du royaume
     mutating func retirer() -> ProtocoleCarte?
 

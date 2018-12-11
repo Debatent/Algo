@@ -32,7 +32,7 @@ func input_main(main:ProtocoleMain, J:String )->String{
 
 
 
-func choixposition(carte:ProtocoleCarte, J:String){
+func choixposition(carte:ProtocoleCarte,champs:ProtocoleChampsDeBataille J:String){
     var b: Int
     b = inputint("Choisissez une colonne (1 ou 2 ou 3), " + J,1,3)
 
@@ -122,7 +122,7 @@ func appercu(main: ProtocoleMain, J:String){
     }
 
 }
-func tour(mainjoueur: ProtocoleMain, champsjoueur: ProtocoleChampsDeBataille , royjoueur: ProtocoleRoyaume, cimjoueur: ProtocoleCimetiere, joueur: String, mainadver: ProtocoleMain, champsadver: ProtocoleChampsDeBataille, royadver: ProtocoleRoyaume, cimadver: ProtocoleCimetiere, adver: String){
+func tour(mainjoueur: ProtocoleMain, champsjoueur: ProtocoleChampsDeBataille , royjoueur: ProtocoleRoyaume, cimjoueur: ProtocoleCimetiere, joueur: String, mainadver: ProtocoleMain, champsadver: ProtocoleChampsDeBataille, royadver: ProtocoleRoyaume, cimadver: ProtocoleCimetiere, adver: String)-> Bool{
     var a: String
     var b: Int
     var c: ProtocoleCarte

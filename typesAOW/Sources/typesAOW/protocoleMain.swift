@@ -18,16 +18,11 @@ public protocol ProtocoleMain : Sequence {
     // Pre: Une Carte
     mutating func ajouter(_ c: ProtocoleCarte)
 
-    // retirer: Main x String-> String x Main
+    // retirer: Main x String-> Carte x Main
     // Retire une carte de la main
     // Pre: le nom de la carte que l'on veut retirer
     // Post: la carte que l'on veut retirer
     mutating func retirer(_ c: String) -> ProtocoleCarte
-
-    // afficher: Main-> String
-    // Affiche la première carte présente dans la main
-    // Post: le nom de la carte
-    func afficher() -> ProtocoleCarte    //à définir
 
    // makeIterator : Main -> ItMain
    // crée un itérateur sur le collection pour itérer avec for in. L'itération se fait dans l'ordre de tirage des cartes
