@@ -51,12 +51,12 @@ func choixposition(champs:ProtocoleChampsDeBataille J:String){
 
 
 
-func poserfront(carte: ProtocoleCarte, champs:ProtocoleChampsDeBataille, J:String){
+func poserfront(carte: ProtocoleCarte, champs:ProtocoleChampsDeBataille,roy: ProtocoleRoyaume, J:String){
     print("La carte sera placée au front")
     let col:Int = inputint("Choisissez une colonne (1 ou 2 ou 3), " + J,1,3)
     let front: Bool = true
     let pos = champs.afficherposition(front, col)
-    champs.poser(c,pos)
+    champs.poser(c,pos,roy)
 }
 
 func champsdebattaillevide(main: ProtocoleMain, champs: ProtocoleChampsDeBataille, royaume: ProtocoleRoyaume, J: String){
@@ -65,14 +65,14 @@ func champsdebattaillevide(main: ProtocoleMain, champs: ProtocoleChampsDeBataill
     print ("Champs de bataille vide, " + J)
     if c = royaume2.retirer(){
         print (c.affichernom)
-        poserfront(carte = c, champs = champs, J = J)
+        poserfront(carte = c, champs = champs,roy = royaume, J = J)
 
     }
     else{
         print("Royaume vide, " + J)
         a=input_main(main = main, J = J)
         c=main2.retirer(a)
-        poserfront(carte = c, champs = champs, J = J)
+        poserfront(carte = c, champs = champs,roy = royaume, J = J)
 }
 
 func appercu(main: ProtocoleMain, J:String){
@@ -317,11 +317,11 @@ for i in main1{
 
 a = input_main(main = main1, J = "J1")
 c=main1.retirer(a)
-poserfront(carte = c, champs = champsdebataille1, J = "J1")
+poserfront(carte = c, champs = champsdebataille1, roy = royaume1, J = "J1")
 
 a = input_main(main = main2, J = "J2")
 c=main2.retirer(a)
-poserfront(carte = c, champs = champsdebataille2, J = "J2")
+poserfront(carte = c, champs = champsdebataille2, roy = royaume2, J = "J2")
 
 
 var jeu=true
