@@ -8,8 +8,6 @@ final class ProtocoleCarteTests: XCTestCase {
 		XCTAssertEqual(1, carte.afficheattaque())
 		XCTAssertEqual(4, carte.affichedefenseD())
 		XCTAssertEqual(4, carte.affichedefenseO())
-		XCTAssertEqual([true,true,true], carte.porteeCac)
-		XCTAssertEqual([true,false,false], carte.porteeDist)
 	}
 
 	func testaffichernom() {
@@ -197,7 +195,6 @@ final class ProtocoleMainTests: XCTestCase {
 		var M = ProtocoleMain()
 		var carte = ProtocoleCarte("soldat")
 		M.ajouter(carte)
-		XCTAssertEqual(carte, M.afficher())
 	}
 
 	func testRetirer() {
@@ -208,17 +205,10 @@ final class ProtocoleMainTests: XCTestCase {
 		XCTAssertEqual(carte, c)
 	}
 
-	func testAfficher() {
-		var M = ProtocoleMain()
-		var carte = ProtocoleCarte("soldat")
-		M.ajouter(carte)
-		XCTAssertEqual(carte, M.afficher())		
-	}
-
     static var allTestsMain = [
         ("testInit", testInit),
-		("testRetirer", testRetirer),
-		("testAfficher", testAfficher)
+		("testAjouter", testAjouter),
+		("testRetirer", testRetirer)
     ]
 }
 
@@ -259,10 +249,10 @@ final class ProtocolePositionTests: XCTestCase {
 
 	func testAfficher() {
 		var p = ProtocolePosition(true, 1)
-		XCTAssertEqual(false, p.afficher())
+		XCTAssertEqual(nil, p.afficher())
 		var C1 = ProtocoleChampsDeBataille()
 		C1.poser(ProtocoleCarte("soldat"), p)
-		XCTAssertEqual(true, p.afficher())
+		XCTAssertEqual(C1, p.afficher())
 		
 	}
 
