@@ -2,6 +2,7 @@ import Foundation
 
 
 public protocol ProtocoleCimetiere {
+    associatedtype ProtocoleCarte
 
     // init: -> Cimetiere
     // Création du cimetière (vide)

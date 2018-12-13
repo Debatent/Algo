@@ -2,6 +2,9 @@ import Foundation
 
 
 public protocol ProtocoleChampsDeBataille: Sequence {
+    associatedtype ProtocoleCarte 
+    associatedtype ProtocolePosition 
+    associatedtype ProtocoleRoyaume 
     associatedtype IteratorChampsDeBataille : IteratorProtocol where IteratorChampsDeBataille.Element == ProtocolePosition
     associatedtype CDB2 : ProtocoleChampsDeBataille
 

@@ -2,6 +2,7 @@ import Foundation
 
 
 public protocol ProtocolePosition {
+    associatedtype ProtocoleCarte
 
     // init: -> Position
     // Création d'une position Vide (Front ou Arrière et colonne 1 , 2 ou 3) True = front False = Arrière
