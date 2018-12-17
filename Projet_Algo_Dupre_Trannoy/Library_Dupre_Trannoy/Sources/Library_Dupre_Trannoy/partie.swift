@@ -9,7 +9,7 @@ public protocol PartieProtocol:Sequence{
 
     //init : -> Partie
     //creation de la partie, une partie est une collection de position 
-    init(pos : Position)
+    init()
     
     //partieGagnee : -> (Int | Vide)
     //savoir si la partie est gagnee et par qui
@@ -47,5 +47,9 @@ public protocol PartieProtocol:Sequence{
     //Pre : joueurActif() = 1 ou 2
     //Post : renvoie 1 si le joueur etait 2 et inversement
     func changementJoueur(joueurActif : Int) -> Int
+
+    // makeIterator : Partie -> ItPartie
+    // crée un itérateur sur le collection pour itérer avec for in. itère sur les positions de la partie.
+    func makeIterator() -> IteratorPartie
 
 }

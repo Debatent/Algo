@@ -21,11 +21,11 @@ public protocol PieceProtocol{
     //Post : retourne soit koropokkuru, kitsune, tanuki, kodama ou kodama samourai
     func nomPiece() -> String
 
-    //positionPiece : Piece -> Position
+    //positionPiece : Piece -> ( Position | Vide )
     //retourne la positon d'une piece 
     //Pre : piece existante
     //Post : retourne vide si la piece est dans la reserve, un charactere correspondant a sa position sinon
-    func positionPiece() -> Position
+    func positionPiece() -> Position?
 
     //deplacementPossible : Piece x Position -> Bool
     //precise si le deplacement d'une piece a une position est possible par rapport a son nom
@@ -52,7 +52,7 @@ public protocol PieceProtocol{
     //changement de proprietaire et modifier la position de la piece à vide
     //Pré : Piece existente sur le plateau
     //Post : Position(piece) -> Vide
-    //si kodama samouraï capturé, il redevient kodama 
+    //si "kodama samourai" capturé, il redevient "kodama" 
     mutating func capturer()
 
     //parachuter : Piece x Position -> Piece
@@ -69,7 +69,7 @@ public protocol PieceProtocol{
 
     //transformation : Piece -> Piece
     //transforme un kodama en kodama samouraï
-    //pré: nom(piece)="kodama" et position(piece)=Vide
+    //pré: nom(piece)="kodama" et position(piece)!=Vide
     //Post: nom(piece)=kodama samouraï
     mutating func transformation()
 
