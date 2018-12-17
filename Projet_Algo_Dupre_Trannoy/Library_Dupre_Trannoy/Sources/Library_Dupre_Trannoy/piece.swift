@@ -86,7 +86,15 @@ public struct Piece {
     var nom : String
     var pos : Position
 
-    
+    private testChar(charac: Character?, chaine: String) -> Character? {
+        for char in (chaine) {
+            if char == charac{
+                return charac
+            } else {
+                return nil
+            }
+        }    
+    }
     //init : -> Piece
     //creation des pieces, initialisees avec le joueur auquel il appartient, le nom et la position de la piece
     public init(_ joueur : Int, _ nom : String, _ pos : Position?) {     
@@ -116,13 +124,7 @@ public struct Piece {
     //Pre : piece existante
     //Post : retourne vide si la piece est dans la reserve, un charactere correspondant a sa position sinon
     func positionPiece() -> Position? {
-        for char in ("abcdefghijkl") {
-            if char == Character(self.pos.char){
-                return self.pos.char
-            } else {
-                return nil
-            }
-        }
+        return self.testChar(self.pos.char, "abcdefghijkl")
     }
 
     //deplacementPossible : Piece x Position -> Bool
@@ -138,7 +140,18 @@ public struct Piece {
     //Pre : piece existante et position existante sur le plateau
     //Post : retourne True si deplacement possible, False sinon
     func deplacementPossible(_ position : Position) -> Bool {
-
+        if (Partie.piecePosition().joueur == Partie.joueurActif()) {
+            return False
+        } else {
+               
+        }        
+        switch self.nom {
+        case "kodama":
+        case "koropokkuru":
+        case "kitsune":
+        case "kodama samourai":
+            
+        }
     }
 
     //deplacer : Piece x Position -> Piece
@@ -174,19 +187,34 @@ public struct Piece {
     //place une piece de la réserve sur le plateau
     //Pré : piece existente et dans la réserve et position sur le plateau
     //Post : piece existente sur plateau
-    mutating func parachuter(position : Position)
+    mutating func parachuter(position : Position) {
+        if self.testChar(position.char, "abcdefghijkl") {
+            self.pos.char = position.char
+            self.pos.correspondance =position.correspondance
+        }
+    }
 
     //estDansZoneAdverse : Piece -> Bool
     //savoir si une piece est dans la zone adverse, les 3 cases les plus eloignes de chaque joueurs
     //Pré : piece existente sur plateau
     //Post : True si la piece est dans la zone adverse, False sinon
-    func estDansZoneAdverse() -> Bool
+    func estDansZoneAdverse() -> Bool {
+        if self.joueur == 1 {
+            return self.testChar(self.pos.char, "ghijkl")
+        } else {
+            return self.testChar(self.pos.char, "abcdef")
+        }
+    }
 
     //transformation : Piece -> Piece
     //transforme un kodama en kodama samouraï
     //pré: nom(piece)="kodama" et position(piece)!=Vide
     //Post: nom(piece)=kodama samouraï
-    mutating func transformation()
+    mutating func transformation() {
+        if self.nom == "kodama" && self.pos.char != nil {
+            self.nom = "kodama samourai"
+        }
+    }
 
 }
 

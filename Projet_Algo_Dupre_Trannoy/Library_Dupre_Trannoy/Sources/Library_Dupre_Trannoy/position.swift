@@ -68,7 +68,4 @@ public struct Position{
         
     }
 
-    getPos() -> pos
-
-
 }
