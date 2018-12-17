@@ -7,10 +7,14 @@ public protocol PartieProtocol:Sequence{
     associatedtype IteratorPosition : IteratorProtocol
         where IteratorPosition.Element == Position
 
+    var quijoue: int
+
     //init : -> Partie
-    //creation de la partie, une partie est une collection de position 
-    init()
-    
+    //creation de la partie, une partie est une collection de position
+    init(){
+        self.quijoue = 1
+    }
+
     //partieGagnee : -> (Int | Vide)
     //savoir si la partie est gagnee et par qui
     //Pre : la partie n'est pas gagnee
@@ -18,7 +22,7 @@ public protocol PartieProtocol:Sequence{
     //la partie est gagnee si un roi est dans la reserve ou si un roi est dans la zone adverse depuis plus d'un tour
     //Post : renvoie Vide si la partie n'est pas gagnee, sinon 1 ou 2 selon qui a gagnee
     func partieGagnee() -> Int?
-        
+
     //caseEstVide : Position -> Bool
     //précise si une case donnée est occupée ou vide
     //Pré : position existente sur le plateau
@@ -37,16 +41,22 @@ public protocol PartieProtocol:Sequence{
     //Post : renvoie la piece avec le nom donné si la piece appartient au joueuractif() sinon Vide si le nom n'a pas de piece dans la reserve ou si elle n'appartient pas au joueur actif
     func pieceNom(nom : String) -> Piece?
 
-    //joueurActif : -> Int 
+    //joueurActif : -> Int
     //au premier tour de jeu c'est le joueur 1 qui commence puis a chaque tour ca s'alterne
     //Pre : la partie n'est pas terminee
     //Post : renvoie 1 ou 2
-    func joueurActif() -> Int
+    func joueurActif() -> Int{
+        return self.quijoue
+    }
+
 
     //changementJoueur : Int -> Int
     //Pre : joueurActif() = 1 ou 2
     //Post : renvoie 1 si le joueur etait 2 et inversement
-    func changementJoueur(joueurActif : Int) -> Int
+    func changementJoueur(joueurActif : Int) -> Int{
+        var a:int = 3 - self.quijoue
+        return a
+    }
 
     // makeIterator : Partie -> ItPartie
     // crée un itérateur sur le collection pour itérer avec for in. itère sur les positions de la partie.
