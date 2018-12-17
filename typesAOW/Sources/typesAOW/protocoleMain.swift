@@ -2,6 +2,7 @@ import Foundation
 
 
 public protocol ProtocoleMain : Sequence {
+    associatedtype ProtocoleCarte
     associatedtype IteratorMain : IteratorProtocol where IteratorMain.Element == ProtocoleCarte
 
     // init: -> Main

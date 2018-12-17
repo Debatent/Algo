@@ -10,6 +10,7 @@ public protocol ProtocoleCarte {
     // la troisieme colonne  si elle peut touùcher les colonne deux cases à droite et deux case à gauche
 
 
+    //init: -> Carte
     // Pre: String représente le nom de la carte que l'on veut créer :
     // RoiA(attaque: 1, defenseD: 4, defenseO: 4, porteeCac:  [1,1,1], porteeDist: [1,0,0])
     // RoiB(attaque: 1, defenseD: 5, defenseO: 4, porteeCac: [1,1,1], porteeDist: [0,0,0])
@@ -51,7 +52,7 @@ public protocol ProtocoleCarte {
     //Post: true si retournée, false sinon
     func estRetournee()->Bool
 
-    //ajoutdegat: Carte x Int ->Carte
+    //ajoutdegat: Carte x Int -> Carte
     //ajoute au degat cumulé la valeur a>=0
     //Pre: le nombre de dégats que l'on veut infliger
     mutating func ajoutdegat(_a:Int)

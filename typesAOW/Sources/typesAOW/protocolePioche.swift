@@ -2,6 +2,7 @@ import Foundation
 
 
 public protocol ProtocolePioche {
+    associatedtype ProtocoleCarte
 
     // init: -> Pioche
     // Création de la pioche composée de 9 soldats, 6 gardes, 5 archers déposés aléatoirement

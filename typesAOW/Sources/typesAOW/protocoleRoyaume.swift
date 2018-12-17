@@ -2,6 +2,7 @@ import Foundation
 
 
 public protocol ProtocoleRoyaume {
+    associatedtype ProtocoleCarte
 
     // init: -> Royaume
     // Création du Royaume (vide)
