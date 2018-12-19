@@ -18,9 +18,7 @@ public protocol PartieProtocol:Sequence{
     //Post : renvoie 1 si la partie est gagnee par le joueur 1; 2 si elle est gagnee par le joueur 2
     //la partie est gagnee si un roi est dans la reserve ou si un roi est dans la zone adverse depuis plus d'un tour
     //Post : renvoie Vide si la partie n'est pas gagnee, sinon 1 ou 2 selon qui a gagnee
-    func partieGagnee() -> Int?{
-
-    }
+    func partieGagnee() -> Int?
 
     //caseEstVide : Position -> Bool
     //précise si une case donnée est occupée ou vide
