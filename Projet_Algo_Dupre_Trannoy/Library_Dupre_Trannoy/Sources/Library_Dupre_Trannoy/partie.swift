@@ -69,9 +69,9 @@ struct Partie: PartieProtocol{
     //creation de la partie, une partie est une collection de pieces
     init(){
         self.quijoue = 1
-        self.pieceplateau=[Piece(1, "kitsune", Position("a")),Piece(1, "koropokkuru",  Position("b")),
-        Piece(1, "tanuki",  Position("c")), Piece(1, "kodama",  Position("e")), Piece(2, "kodama",  Position("h")),
-        Piece(2, "tanuki",  Position("j")),Piece(2, "koropokkuru",  Position("k")),Piece(2, "kitsune",  Position("l"))
+        self.pieceplateau=[Piece(1, "kitsune", Position("a")), Piece(1, "koropokkuru", Position("b")),
+        Piece(1, "tanuki", Position("c")), Piece(1, "kodama", Position("e")), Piece(2, "kodama", Position("h")),
+        Piece(2, "tanuki", Position("j")), Piece(2, "koropokkuru", Position("k")), Piece(2, "kitsune", Position("l")),
         Piece(1, "kodoma samourai", nil), Piece(2, "kodoma samourai", nil)]
     }
 
