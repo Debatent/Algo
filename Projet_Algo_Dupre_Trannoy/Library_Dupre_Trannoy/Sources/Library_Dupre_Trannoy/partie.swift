@@ -114,8 +114,10 @@ struct Partie: PartieProtocol{
         var reponse: bool = true
         var it = self.makeIterator()
         while let a = it.next(){
-            if let a.positionPiece() == position{
-                reponse = false
+            if let b = a.positionPiece{
+                if b == position{
+                    reponse = false
+                }
             }
         }
         return reponse
@@ -128,8 +130,10 @@ struct Partie: PartieProtocol{
     func piecePosition(position : Position) -> Piece?{
         var it = self.makeIterator()
         while let a = it.next(){
-            if let a.positionPiece() == position{
-                return a
+            if let b = a.positionPiece(){
+                if b == position{
+                    return a
+                }
             }
         }
         return nil
@@ -192,7 +196,7 @@ struct IteratorPartie: IteratorProtocol{
     }
 
 
-    mutating func next() -> Piece{
+    mutating func next() -> Piece?{
         if indice >= self.p.pieceplateau.count{
             return nil
         }
