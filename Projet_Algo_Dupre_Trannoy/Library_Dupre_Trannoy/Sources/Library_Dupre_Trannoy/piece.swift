@@ -155,19 +155,19 @@ public struct Piece : PieceProtocol {
     //Post : retourne True si deplacement possible, False sinon
     func deplacementPossible(_ position : Position, _ partie : Partie) -> Bool {
         //A compléter
-        let a = position.correspondance[0]
-        let b = position.correspondance[1]
-        if (((a != nil) && (b != nil)) || (a <= 4) || (b <= 4) || (a >= 0) || (b >= 0) || 
-        (partie.piecePosition() != nil) || (partie.piecePosition().joueur != partie.joueurActif())) {
-            var depl : [Int] = [self.pos.correspondance[0] - position.correspondance[0], self.pos.correspondance[1] - position.pos.correspondance[1]] 
-            for i in self.deplacement {
-                if (depl == i) {
-                    return true
+        if let a = position.correspondance { 
+            if ((a[0] <= 4) || (a[1] <= 4) || (a[0] >= 0) || (a[1] >= 0) || (partie.piecePosition(position) != nil) || (partie.piecePosition(position).joueur != partie.joueurActif())) {
+                var depl : [Int] = [self.pos.correspondance[0] - position.correspondance[0], self.pos.correspondance[1] - position.pos.correspondance[1]] 
+                for i in self.deplacement {
+                    if (depl == i) {
+                        return true
+                    }
                 }
             }
+            return false
+        } else {
+            return false
         }
-        return false
-    }
 
     //deplacer : Piece x Position -> Piece
     //déplace la pièce à la position donnée
