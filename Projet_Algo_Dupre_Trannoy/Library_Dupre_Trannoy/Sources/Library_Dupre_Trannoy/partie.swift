@@ -192,7 +192,7 @@ struct IteratorPartie: IteratorProtocol{
     }
 
 
-    mutating func next(){
+    mutating func next() -> Piece{
         if indice >= self.p.pieceplateau.count{
             return nil
         }
