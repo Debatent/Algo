@@ -62,7 +62,7 @@ public protocol PartieProtocol:Sequence{
 
 
 struct Partie: PartieProtocol{
-    var quijoue: int
+    var quijoue: Int
     var pieceplateau:[Piece]
 
     //init : -> Partie
