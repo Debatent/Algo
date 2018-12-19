@@ -63,7 +63,7 @@ public protocol PartieProtocol:Sequence{
 
 struct Partie: PartieProtocol{
     var quijoue: int
-    var pieceplateau:[PieceProtocol]
+    var pieceplateau:[Piece]
 
     //init : -> Partie
     //creation de la partie, une partie est une collection de pieces
@@ -91,14 +91,14 @@ struct Partie: PartieProtocol{
                     comp1 += 1
                 }
                 else{
-                    comp2 +=1
+                    comp2 += 1
                 }
             }
         }
         if comp1 == 2{
             return 1
         }
-        elif comp2 == 2{
+        else if comp2 == 2{
             return 2
         }
         else{
