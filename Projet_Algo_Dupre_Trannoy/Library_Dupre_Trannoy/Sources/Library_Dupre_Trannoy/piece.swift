@@ -105,13 +105,13 @@ public struct Piece : PieceProtocol {
         self.pos = pos  
         switch nom {
             case "kodama":
-                self.pos.deplacement = [[1,0]]
+                self.deplacement = [[1,0]]
             case "koropokkuru":
-                self.pos.deplacement = [[0,1], [-1,1], [-1,0], [0, -1], [1, -1], [1,0], [1,1], [-1, -1]]
+                self.deplacement = [[0,1], [-1,1], [-1,0], [0, -1], [1, -1], [1,0], [1,1], [-1, -1]]
             case "kitsune":
-                self.pos.deplacement = [[1,1], [1,-1], [-1, -1], [-1, 1]]
+                self.deplacement = [[1,1], [1,-1], [-1, -1], [-1, 1]]
             case "kodama samourai":
-                self.pos.deplacement = [[0,1], [-1,1], [-1,0], [0, -1], [1, -1], [1,0], [1,1], [-1, -1]]
+                self.deplacement = [[0,1], [-1,1], [-1,0], [0, -1], [1, -1], [1,0], [1,1], [-1, -1]]
             
         }         
 
@@ -155,16 +155,18 @@ public struct Piece : PieceProtocol {
     //Post : retourne True si deplacement possible, False sinon
     func deplacementPossible(_ position : Position, _ partie : Partie) -> Bool {
         //A compléter
-        if ((position.correspondance[0] <= 4) || (position.correspondance[1] <= 4) || (position.correspondance[0] >= 0) || (position.correspondance[1] >= 0) || 
-        !(partie.piecePosition() is nil) || (partie.piecePosition().joueur != partie.joueurActif())) {
+        let a = position.correspondance[0]
+        let b = position.correspondance[1]
+        if (((a != nil) && (b != nil)) || (a <= 4) || (b <= 4) || (a >= 0) || (b >= 0) || 
+        (partie.piecePosition() != nil) || (partie.piecePosition().joueur != partie.joueurActif())) {
             var depl : [Int] = [self.pos.correspondance[0] - position.correspondance[0], self.pos.correspondance[1] - position.pos.correspondance[1]] 
-            for i in self.pos.deplacement {
+            for i in self.deplacement {
                 if (depl == i) {
-                    return True
+                    return true
                 }
             }
         }
-        return False
+        return false
     }
 
     //deplacer : Piece x Position -> Piece
@@ -173,11 +175,11 @@ public struct Piece : PieceProtocol {
     //Pré : déplacementPossible(Piece,Position)=True
     //Post : Renvoi la piece avec sa nouvelle position
     mutating func deplacer(position : Position, _ partie : Partie) {
-        if (deplacementPossible(position) && !(partie.piecePosition(position))) {
+        if (partie.piecePosition(position) is nil) || (deplacementPossible(position, partie) && !(partie.piecePosition(position).position)) {
             self.pos.char = position.char
             self.pos.correspondance = position.correspondance
 
-        } else if (deplacementPossible(position)) {
+        } else if (deplacementPossible(position, partie)) {
             partie.piecePosition(position).capturer()            
         }
     }
