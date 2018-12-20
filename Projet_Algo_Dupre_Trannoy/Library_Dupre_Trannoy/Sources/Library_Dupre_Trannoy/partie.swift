@@ -47,7 +47,7 @@ public protocol PartieProtocol:Sequence{
     //changementJoueur : Int -> Int
     //Pre : joueurActif() = 1 ou 2
     //Post : renvoie 1 si le joueur etait 2 et inversement
-    func changementJoueur(joueurActif : Int) -> Int
+    mutating func changementJoueur(joueurActif : Int) -> Int
 
     // makeIterator : Partie -> ItPartie
     // crée un itérateur sur le collection pour itérer avec for in. itère sur les positions de la partie.
@@ -87,7 +87,7 @@ struct Partie: PartieProtocol{
         var it = self.makeIterator()
         while let a = it.next(){
             if a.nomPiece() == "koropokkuru"{
-                if a.joueurPiece == 1{
+                if a.joueurPiece() == 1{
                     comp1 += 1
                 }
                 else{
@@ -111,12 +111,14 @@ struct Partie: PartieProtocol{
     //Pré : position existente sur le plateau
     //Post : renvoie True si case vide, False sinon
     func caseEstVide(position : Position) -> Bool{
-        var reponse: bool = true
+        var reponse: Bool = true
         var it = self.makeIterator()
         while let a = it.next(){
-            if let b = a.positionPiece{
-                if b == position{
-                    reponse = false
+            if let b = a.positionPiece(){
+                if let c = b.getposcharacter(){
+                    if c == position.getposcharacter(){
+                        reponse = false
+                    }
                 }
             }
         }
@@ -131,8 +133,10 @@ struct Partie: PartieProtocol{
         var it = self.makeIterator()
         while let a = it.next(){
             if let b = a.positionPiece(){
-                if b == position{
-                    return a
+                if let c = b.getposcharacter(){
+                    if c == position.getposcharacter(){
+                        return a
+                    }
                 }
             }
         }
@@ -147,7 +151,7 @@ struct Partie: PartieProtocol{
         var it = self.makeIterator()
         while let a = it.next(){
             if a.nomPiece() == nom{
-                if a.joueurPiece == joueurActif(){
+                if a.joueurPiece == self.joueurActif(){
                     return a
                 }
             }
@@ -167,15 +171,16 @@ struct Partie: PartieProtocol{
     //changementJoueur : Int -> Int
     //Pre : joueurActif() = 1 ou 2
     //Post : renvoie 1 si le joueur etait 2 et inversement
-    func changementJoueur(joueurActif : Int) -> Int{
-        var a:int = 3 - self.quijoue
+    mutating func changementJoueur(joueurActif : Int) -> Int{
+        let a:Int = 3 - self.quijoue
+        self.quijoue = a
         return a
     }
 
     // makeIterator : Partie -> ItPartie
     // crée un itérateur sur le collection pour itérer avec for in. itère sur les positions de la partie.
     func makeIterator() -> IteratorPartie{
-        return IteratorPartie(self)
+        return IteratorPartie(Partie = self)
 
     }
 
@@ -201,7 +206,7 @@ struct IteratorPartie: IteratorProtocol{
             return nil
         }
         else{
-            var a = self.p.pieceplateau[indice]
+            let a = self.p.pieceplateau[indice]
             self.indice += 1
             return a
         }

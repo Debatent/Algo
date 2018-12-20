@@ -5,12 +5,12 @@ import Foundation
 public protocol PieceProtocol{
     associatedtype Position : PositionProtocol
     associatedtype Partie : PartieProtocol
-    
+
     func testChar(charac: Character?, chaine: String) -> Character?
     //init : -> Piece
     //creation des pieces, initialisees avec le joueur auquel il appartient, le nom et la position de la piece
     init(joueur : Int, nom : String, pos : Position)
-        
+
     //joueurPiece : Piece -> Int
     //retourne le joueur auquel la piece appartient
     //Pre : piece existante
@@ -18,13 +18,13 @@ public protocol PieceProtocol{
     func joueurPiece() -> Int
 
     //nomPiece : Piece -> String
-    //retourne le nom d'une piece 
+    //retourne le nom d'une piece
     //Pre : piece existante
     //Post : retourne soit koropokkuru, kitsune, tanuki, kodama ou kodama samourai
     func nomPiece() -> String
 
     //positionPiece : Piece -> ( Position | Vide )
-    //retourne la positon d'une piece 
+    //retourne la positon d'une piece
     //Pre : piece existante
     //Post : retourne vide si la piece est dans la reserve, un charactere correspondant a sa position sinon
     func positionPiece() -> Position?
@@ -49,12 +49,12 @@ public protocol PieceProtocol{
     //Pré : déplacementPossible(Piece,Position)=True
     //Post : Renvoi la piece avec sa nouvelle position
     mutating func deplacer(position : Position)
-        
+
     //capturer : Piece -> Piece
     //changement de proprietaire et modifier la position de la piece à vide
     //Pré : Piece existente sur le plateau
     //Post : Position(piece) -> Vide
-    //si "kodama samourai" capturé, il redevient "kodama" 
+    //si "kodama samourai" capturé, il redevient "kodama"
     mutating func capturer()
 
     //parachuter : Piece x Position -> Piece
@@ -91,18 +91,19 @@ public struct Piece : PieceProtocol {
         for char in (chaine) {
             if char == charac{
                 return charac
-            } else {
+            }
+            else {
                 return nil
             }
-        }    
+        }
     }
 
     //init : -> Piece
     //creation des pieces, initialisees avec le joueur auquel il appartient, le nom et la position de la piece
-    public init(_ joueur : Int, _ nom : String, _ pos : Position?) {     
+    public init(_ joueur : Int, _ nom : String, _ pos : Position?) {
         self.joueur = joueur
         self.nom = nom
-        self.pos = pos  
+        self.pos = pos
         switch nom {
             case "kodama":
                 self.deplacement = [[1,0]]
@@ -112,11 +113,11 @@ public struct Piece : PieceProtocol {
                 self.deplacement = [[1,1], [1,-1], [-1, -1], [-1, 1]]
             case "kodama samourai":
                 self.deplacement = [[0,1], [-1,1], [-1,0], [0, -1], [1, -1], [1,0], [1,1], [-1, -1]]
-            
-        }         
+
+        }
 
     }
-        
+
     //joueurPiece : Piece -> Int
     //retourne le joueur auquel la piece appartient
     //Pre : piece existante
@@ -126,7 +127,7 @@ public struct Piece : PieceProtocol {
     }
 
     //nomPiece : Piece -> String
-    //retourne le nom d'une piece 
+    //retourne le nom d'une piece
     //Pre : piece existante
     //Post : retourne soit koropokkuru, kitsune, tanuki, kodama ou kodama samourai
     func nomPiece() -> String {
@@ -134,7 +135,7 @@ public struct Piece : PieceProtocol {
     }
 
     //positionPiece : Piece -> ( Position | Vide )
-    //retourne la positon d'une piece 
+    //retourne la positon d'une piece
     //Pre : piece existante
     //Post : retourne vide si la piece est dans la reserve, un charactere correspondant a sa position sinon
     func positionPiece() -> Position? {
@@ -155,9 +156,9 @@ public struct Piece : PieceProtocol {
     //Post : retourne True si deplacement possible, False sinon
     func deplacementPossible(_ position : Position, _ partie : Partie) -> Bool {
         //A compléter
-        if let a = position.correspondance { 
+        if let a = position.correspondance {
             if ((a[0] <= 4) || (a[1] <= 4) || (a[0] >= 0) || (a[1] >= 0) || (partie.piecePosition(position) != nil) || (partie.piecePosition(position).joueur != partie.joueurActif())) {
-                var depl : [Int] = [self.pos.correspondance[0] - position.correspondance[0], self.pos.correspondance[1] - position.pos.correspondance[1]] 
+                var depl : [Int] = [self.pos.correspondance[0] - position.correspondance[0], self.pos.correspondance[1] - position.pos.correspondance[1]]
                 for i in self.deplacement {
                     if (depl == i) {
                         return true
@@ -165,7 +166,8 @@ public struct Piece : PieceProtocol {
                 }
             }
             return false
-        } else {
+        }
+        else {
             return false
         }
 
@@ -179,23 +181,24 @@ public struct Piece : PieceProtocol {
             self.pos.char = position.char
             self.pos.correspondance = position.correspondance
 
-        } else if (deplacementPossible(position, partie)) {
-            partie.piecePosition(position).capturer()            
+        }
+        else if (deplacementPossible(position, partie)) {
+            partie.piecePosition(position).capturer()
         }
     }
-        
+
     //capturer : Piece -> Piece
     //changement de proprietaire et modifier la position de la piece à vide
     //Pré : Piece existente sur le plateau
     //Post : Position(piece) -> Vide
-    //si "kodama samourai" capturé, il redevient "kodama" 
+    //si "kodama samourai" capturé, il redevient "kodama"
     mutating func capturer() {
         self.pos.char = nil
         self.pos.correspondance = nil
         self.joueur = Partie.joueurActif()
-        if (self.nom == "kodama samourai") {   
-            self.nom = "kodama"                 
-        }        
+        if (self.nom == "kodama samourai") {
+            self.nom = "kodama"
+        }
     }
 
     //parachuter : Piece x Position -> Piece
@@ -216,7 +219,8 @@ public struct Piece : PieceProtocol {
     func estDansZoneAdverse() -> Bool {
         if self.joueur == 1 {
             return self.testChar(self.pos.char, "ghijkl")
-        } else {
+        }
+        else {
             return self.testChar(self.pos.char, "abcdef")
         }
     }
@@ -232,4 +236,3 @@ public struct Piece : PieceProtocol {
     }
 
 }
-
