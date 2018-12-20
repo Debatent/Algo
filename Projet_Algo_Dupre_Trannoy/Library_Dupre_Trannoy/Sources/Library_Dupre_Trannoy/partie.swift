@@ -5,7 +5,7 @@ public protocol PartieProtocol:Sequence{
     associatedtype Position : PositionProtocol
     associatedtype Piece : PieceProtocol
     associatedtype IteratorPartie : IteratorProtocol
-        where IteratorPartie.Element == Piece
+        where IteratorPartie.Element == Piece?
 
 
     //init : -> Partie
@@ -62,8 +62,12 @@ public protocol PartieProtocol:Sequence{
 
 
 struct Partie: PartieProtocol{
-    var quijoue: Int
+    typealias Piece = PieceProtocol
+    typealias IteratorPartie = IteratorProtocol
+
+    private var quijoue: Int
     var pieceplateau:[Piece]
+
 
     //init : -> Partie
     //creation de la partie, une partie est une collection de pieces
@@ -181,10 +185,9 @@ struct Partie: PartieProtocol{
     // makeIterator : Partie -> ItPartie
     // crée un itérateur sur le collection pour itérer avec for in. itère sur les positions de la partie.
     mutating func makeIterator() -> IteratorPartie{
-        return IteratorPartie(Partie = self)
+        return IteratorPartie(self)
 
     }
-
 }
 
 
@@ -193,23 +196,28 @@ struct Partie: PartieProtocol{
 
 
 struct IteratorPartie: IteratorProtocol{
-    let p:Partie
-    var indice: Int
+    typealias Piece = PieceProtocol
+    typealias Partie = PartieProtocol
+    private let p:Partie
+    private var indice: Int
 
-    init(Partie: Partie){
+
+
+    init(_ Partie: Partie){
         self.indice = 0
         self.p = Partie
     }
 
 
     mutating func next() -> Piece?{
-        if indice >= self.p.pieceplateau.count{
+        let a = self.p.pieceplateau
+        if indice >= a.count{
             return nil
         }
         else{
-            let a = self.p.pieceplateau[indice]
+            let b = a[indice]
             self.indice += 1
-            return a
+            return b
         }
     }
 }
