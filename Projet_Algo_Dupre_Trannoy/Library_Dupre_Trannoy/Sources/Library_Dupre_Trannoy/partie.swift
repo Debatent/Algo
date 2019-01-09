@@ -24,19 +24,19 @@ public protocol PartieProtocol:Sequence{
     //précise si une case donnée est occupée ou vide
     //Pré : position existente sur le plateau
     //Post : renvoie True si case vide, False sinon
-    func caseEstVide(position : Position) -> Bool
+    func caseEstVide(_ position : Position) -> Bool
 
     //piecePosition : Position -> (Piece | Vide)
     //fonction qui a une position donnée sur le plateau renvoie la piece correspondante
     //Pre : position sur le plateau du joueur actif
     //Post : renvoie la piece à la position donnée si la piece appartient au joueuractif() sinon Vide si la position n'a pas de piece ou si elle n'appartient pas au joueur actif
-    func piecePosition(position : Position) -> Piece?
+    func piecePosition(_ position : Position) -> Piece?
 
     //pieceNom : String -> (Piece | Vide)
     //a partir du nom d'une piece dans la reserve renvoie la Piece correspondante
     //Pre : nom d'une piece dans la reserve du joueur actif
     //Post : renvoie la piece avec le nom donné si la piece appartient au joueuractif() sinon Vide si le nom n'a pas de piece dans la reserve ou si elle n'appartient pas au joueur actif
-    func pieceNom(nom : String) -> Piece?
+    func pieceNom(_ nom : String) -> Piece?
 
     //joueurActif : -> Int
     //au premier tour de jeu c'est le joueur 1 qui commence puis a chaque tour ca s'alterne
@@ -47,7 +47,7 @@ public protocol PartieProtocol:Sequence{
     //changementJoueur : Int -> Int
     //Pre : joueurActif() = 1 ou 2
     //Post : renvoie 1 si le joueur etait 2 et inversement
-    mutating func changementJoueur(joueurActif : Int) -> Int
+    mutating func changementJoueur(_ joueurActif : Int) -> Int
 
     // makeIterator : Partie -> ItPartie
     // crée un itérateur sur le collection pour itérer avec for in. itère sur les positions de la partie.
@@ -115,7 +115,7 @@ struct Partie: PartieProtocol{
     //précise si une case donnée est occupée ou vide
     //Pré : position existente sur le plateau
     //Post : renvoie True si case vide, False sinon
-    func caseEstVide(position : Position) -> Bool{
+    func caseEstVide(_ position : Position) -> Bool{
         var reponse: Bool = true
         var it = self.makeIterator()
         while let a = it.next(){
@@ -134,7 +134,7 @@ struct Partie: PartieProtocol{
     //fonction qui a une position donnée sur le plateau renvoie la piece correspondante
     //Pre : position sur le plateau du joueur actif
     //Post : renvoie la piece à la position donnée si la piece appartient au joueuractif() sinon Vide si la position n'a pas de piece ou si elle n'appartient pas au joueur actif
-    func piecePosition(position : Position) -> Piece?{
+    func piecePosition(_ position : Position) -> Piece?{
         var it = self.makeIterator()
         while let a = it.next(){
             if let b = a.positionPiece(){
@@ -152,7 +152,7 @@ struct Partie: PartieProtocol{
     //a partir du nom d'une piece dans la reserve renvoie la Piece correspondante
     //Pre : nom d'une piece dans la reserve du joueur actif
     //Post : renvoie la piece avec le nom donné si la piece appartient au joueuractif() sinon Vide si le nom n'a pas de piece dans la reserve ou si elle n'appartient pas au joueur actif
-    func pieceNom(nom : String) -> Piece?{
+    func pieceNom(_ nom : String) -> Piece?{
         var it = self.makeIterator()
         while let a = it.next(){
             if a.nomPiece() == nom{
@@ -176,7 +176,7 @@ struct Partie: PartieProtocol{
     //changementJoueur : Int -> Int
     //Pre : joueurActif() = 1 ou 2
     //Post : renvoie 1 si le joueur etait 2 et inversement
-    mutating func changementJoueur(joueurActif : Int) -> Int{
+    mutating func changementJoueur(_ joueurActif : Int) -> Int{
         let a:Int = 3 - self.quijoue
         self.quijoue = a
         return a

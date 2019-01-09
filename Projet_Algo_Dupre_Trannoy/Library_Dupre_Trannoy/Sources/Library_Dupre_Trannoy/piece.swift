@@ -84,10 +84,10 @@ public struct Piece : PieceProtocol {
 
     var joueur : Int
     var nom : String
-    var pos : Position
+    var pos : Position?
     var deplacement: [[Int]]
 
-    private func testChar(charac: Character?, chaine: String) -> Character? {
+    private func testChar(_ charac: Character?, _ chaine: String) -> Character? {
         for char in (chaine) {
             if char == charac{
                 return charac
@@ -103,7 +103,7 @@ public struct Piece : PieceProtocol {
     public init(_ joueur : Int, _ nom : String, _ pos : Position?) {
         self.joueur = joueur
         self.nom = nom
-        self.pos = pos
+        if let a = pos { self.pos = a }
         switch nom {
             case "kodama":
                 self.deplacement = [[1,0]]
@@ -113,6 +113,8 @@ public struct Piece : PieceProtocol {
                 self.deplacement = [[1,1], [1,-1], [-1, -1], [-1, 1]]
             case "kodama samourai":
                 self.deplacement = [[0,1], [-1,1], [-1,0], [0, -1], [1, -1], [1,0], [1,1], [-1, -1]]
+            default: break
+
 
         }
 
@@ -139,7 +141,7 @@ public struct Piece : PieceProtocol {
     //Pre : piece existante
     //Post : retourne vide si la piece est dans la reserve, un charactere correspondant a sa position sinon
     func positionPiece() -> Position? {
-        return self.testChar(self.pos.char, "abcdefghijkl")
+        return self.pos
     }
 
     //deplacementPossible : Piece x Position -> Bool
@@ -170,6 +172,7 @@ public struct Piece : PieceProtocol {
         else {
             return false
         }
+    }
 
     //deplacer : Piece x Position -> Piece
     //déplace la pièce à la position donnée
@@ -177,7 +180,7 @@ public struct Piece : PieceProtocol {
     //Pré : déplacementPossible(Piece,Position)=True
     //Post : Renvoi la piece avec sa nouvelle position
     mutating func deplacer(position : Position, _ partie : Partie) {
-        if (partie.piecePosition(position) is nil) || (deplacementPossible(position, partie) && !(partie.piecePosition(position).position)) {
+        if (partie.piecePosition(position) == nil) || (deplacementPossible(position, partie) && !(partie.piecePosition(position).position)) {
             self.pos.char = position.char
             self.pos.correspondance = position.correspondance
 
