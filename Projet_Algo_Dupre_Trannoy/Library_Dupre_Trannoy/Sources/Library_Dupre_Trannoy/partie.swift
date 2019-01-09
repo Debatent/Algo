@@ -122,10 +122,12 @@ struct Partie: PartieProtocol{
         var it = self.makeIterator()
         while let a = it.next(){
             if let b = a.positionPiece(){
-                return pos == b
-                
+                if pos.char == b.char {
+                    reponse = false
+                }             
             }
         }
+        return reponse
     }
 
     //piecePosition : Position -> (Piece | Vide)
@@ -135,10 +137,10 @@ struct Partie: PartieProtocol{
     func piecePosition(_ pos : Position) -> Piece?{
         var it = self.makeIterator()
         while let a = it.next(){
-            if a.joueurPiece() == self.joueurActif{
+            if a.joueurPiece() == self.joueurActif() {
 
                 if let b = a.positionPiece(){
-                    if b == pos{
+                    if b.char == pos.char{
                         return a
                     
                     }
