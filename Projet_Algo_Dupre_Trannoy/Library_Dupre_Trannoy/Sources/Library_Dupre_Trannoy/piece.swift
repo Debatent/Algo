@@ -94,10 +94,9 @@ struct Piece : PieceProtocol {
             if char == charac{
                 return charac
             }
-            else {
-                return nil
-            }
+            
         }
+        return nil
     }
 
     //init : -> Piece
@@ -115,7 +114,8 @@ struct Piece : PieceProtocol {
                 self.deplacement = [[1,1], [1,-1], [-1, -1], [-1, 1]]
             case "kodama samourai":
                 self.deplacement = [[0,1], [-1,1], [-1,0], [0, -1], [1, -1], [1,0], [1,1], [-1, -1]]
-            default: break
+            default:
+                self.deplacement = [[0,0]]
 
 
         }
@@ -227,22 +227,20 @@ struct Piece : PieceProtocol {
                 if let b = a.getposcharacter() {
                     if self.testChar(b, "ghijkl") != nil {
                         return true
-                    } else {
-                        return false
-                    }                   
+                    }          
                 } 
             }
-        } else {
+        }
+        else {
             if let a = self.pos {
                 if let b = a.getposcharacter() {
                     if self.testChar(b, "abcdef") != nil {
                         return true
-                    } else {
-                        return false
                     }                   
                 } 
             }            
         }
+        return false
     }
 
     //transformation : Piece -> Piece
