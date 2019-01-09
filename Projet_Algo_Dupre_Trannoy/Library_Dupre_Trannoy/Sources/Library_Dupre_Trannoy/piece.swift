@@ -3,13 +3,14 @@ import Foundation
 //Type Piece(joueur, nom, Position)
 //chaque piece est associee a son joueur, son nom et sa position
 public protocol PieceProtocol{
-    associatedtype Position : PositionProtocol
-    associatedtype Partie : PartieProtocol
+    associatedtype Pos: PositionProtocol
+    associatedtype Par: PartieProtocol
 
-    func testChar(charac: Character?, chaine: String) -> Character?
     //init : -> Piece
     //creation des pieces, initialisees avec le joueur auquel il appartient, le nom et la position de la piece
-    init(joueur : Int, nom : String, pos : Position)
+    init(_ joueur : Int, _ nom : String, _ position : Pos?)
+
+    func testChar(_ charac: Character, _ chaine: String) -> Character?
 
     //joueurPiece : Piece -> Int
     //retourne le joueur auquel la piece appartient
@@ -27,7 +28,7 @@ public protocol PieceProtocol{
     //retourne la positon d'une piece
     //Pre : piece existante
     //Post : retourne vide si la piece est dans la reserve, un charactere correspondant a sa position sinon
-    func positionPiece() -> Position?
+    func positionPiece() -> Pos?
 
     //deplacementPossible : Piece x Position -> Bool
     //precise si le deplacement d'une piece a une position est possible par rapport a son nom
@@ -41,27 +42,27 @@ public protocol PieceProtocol{
     //kodama samurai : Ouest, Nord-Ouest, Nord, Nord-Est, Est, Sud
     //Pre : piece existante et position existante sur le plateau
     //Post : retourne True si deplacement possible, False sinon
-    func deplacementPossible(position : Position) -> Bool
+    func deplacementPossible(_ position : Pos, _ partie: Par) -> Bool
 
     //deplacer : Piece x Position -> Piece
     //déplace la pièce à la position donnée
     //si la case est occupée par un ennemi, faire capturer de la piece de l'ennemi
     //Pré : déplacementPossible(Piece,Position)=True
     //Post : Renvoi la piece avec sa nouvelle position
-    mutating func deplacer(position : Position)
+    mutating func deplacer(_ position : Pos, _ partie : Par)
 
     //capturer : Piece -> Piece
     //changement de proprietaire et modifier la position de la piece à vide
     //Pré : Piece existente sur le plateau
     //Post : Position(piece) -> Vide
     //si "kodama samourai" capturé, il redevient "kodama"
-    mutating func capturer()
+    mutating func capturer(_ partie : Par)
 
     //parachuter : Piece x Position -> Piece
     //place une piece de la réserve sur le plateau
     //Pré : piece existente et dans la réserve et position sur le plateau
     //Post : piece existente sur plateau
-    mutating func parachuter(position : Position)
+    mutating func parachuter(_ position : Pos)
 
     //estDansZoneAdverse : Piece -> Bool
     //savoir si une piece est dans la zone adverse, les 3 cases les plus eloignes de chaque joueurs
@@ -80,14 +81,17 @@ public protocol PieceProtocol{
 
 //Type Piece(joueur, nom, Position)
 //chaque piece est associee a son joueur, son nom et sa position
-public struct Piece : PieceProtocol {
+struct Piece : PieceProtocol {
+
+    typealias Pos = Position
+    typealias Par = Partie
 
     var joueur : Int
     var nom : String
     var pos : Position?
     var deplacement: [[Int]]
 
-    private func testChar(_ charac: Character, _ chaine: String) -> Character? {
+    func testChar(_ charac: Character, _ chaine: String) -> Character? {
         for char in (chaine) {
             if char == charac{
                 return charac
@@ -100,7 +104,7 @@ public struct Piece : PieceProtocol {
 
     //init : -> Piece
     //creation des pieces, initialisees avec le joueur auquel il appartient, le nom et la position de la piece
-    public init(_ joueur : Int, _ nom : String, _ pos : Position?) {
+    init(_ joueur : Int, _ nom : String, _ pos : Position?) {
         self.joueur = joueur
         self.nom = nom
         self.pos = pos
@@ -124,7 +128,7 @@ public struct Piece : PieceProtocol {
     //retourne le joueur auquel la piece appartient
     //Pre : piece existante
     //Post : retourne le joueur soit 1, soit 2
-    public func joueurPiece() -> Int {
+    func joueurPiece() -> Int {
         return self.joueur
     }
 
@@ -189,7 +193,7 @@ public struct Piece : PieceProtocol {
         if deplacementPossible(pos, partie) {
             self.pos = pos                                
             if var a = partie.piecePosition(pos) {
-                a.capturer()
+                a.capturer(partie)
             }                                            
         }
     }
@@ -199,9 +203,9 @@ public struct Piece : PieceProtocol {
     //Pré : Piece existente sur le plateau
     //Post : Position(piece) -> Vide
     //si "kodama samourai" capturé, il redevient "kodama"
-    mutating func capturer() {
+    mutating func capturer(_ partie: Partie) {
         self.pos = nil
-        self.joueur = Partie.joueurActif()
+        self.joueur = partie.joueurActif()
         if (self.nom == "kodama samourai") {
             self.nom = "kodama"
         }
@@ -211,7 +215,7 @@ public struct Piece : PieceProtocol {
     //place une piece de la réserve sur le plateau
     //Pré : piece existente et dans la réserve et position sur le plateau
     //Post : piece existente sur plateau
-    mutating func parachuter(position : Position) {
+    mutating func parachuter(_ position : Position) {
         self.pos = position
     }
 
