@@ -10,8 +10,6 @@ public protocol PieceProtocol{
     //creation des pieces, initialisees avec le joueur auquel il appartient, le nom et la position de la piece
     init(_ joueur : Int, _ nom : String, _ position : Pos?)
 
-    func testChar(_ charac: Character, _ chaine: String) -> Character?
-
     //joueurPiece : Piece -> Int
     //retourne le joueur auquel la piece appartient
     //Pre : piece existante
@@ -91,7 +89,7 @@ struct Piece : PieceProtocol {
     var pos : Position?
     var deplacement: [[Int]]
 
-    func testChar(_ charac: Character, _ chaine: String) -> Character? {
+    private func testChar(_ charac: Character, _ chaine: String) -> Character? {
         for char in (chaine) {
             if char == charac{
                 return charac
