@@ -44,6 +44,10 @@ public protocol PartieProtocol:Sequence{
     //Post : renvoie 1 ou 2
     func joueurActif() -> Int
 
+    //listepiece: ->[Piece]
+    //Renvoie la liste des pieces de la partie
+    func listepiece() -> [Piece]
+
     //changementJoueur : Int -> Int
     //Pre : joueurActif() = 1 ou 2
     //Post : renvoie 1 si le joueur etait 2 et inversement
@@ -172,6 +176,11 @@ struct Partie: PartieProtocol{
         return self.quijoue
     }
 
+    //listepiece: ->[Piece]
+    //Renvoie la liste des pieces de la partie
+    func listepiece() -> [Piece]{
+        return self.pieceplateau
+    }
 
     //changementJoueur : Int -> Int
     //Pre : joueurActif() = 1 ou 2
@@ -198,7 +207,7 @@ struct Partie: PartieProtocol{
 struct IteratorPartie: IteratorProtocol{
     typealias Piece = PieceProtocol
     typealias Partie = PartieProtocol
-    private let p:Partie
+    private let p: Partie
     private var indice: Int
 
 
@@ -210,7 +219,7 @@ struct IteratorPartie: IteratorProtocol{
 
 
     mutating func next() -> Piece?{
-        let a = self.p.pieceplateau
+        let a = self.p.listepiece()
         if indice >= a.count{
             return nil
         }
