@@ -73,6 +73,7 @@ public struct Position : PositionProtocol{
         }
 
 	}
+    
 	public func getposcharacter()->Character?{
 		return self.char
 	}

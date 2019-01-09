@@ -87,7 +87,7 @@ public struct Piece : PieceProtocol {
     var pos : Position?
     var deplacement: [[Int]]
 
-    private func testChar(_ charac: Character?, _ chaine: String) -> Character? {
+    private func testChar(_ charac: Character, _ chaine: String) -> Character? {
         for char in (chaine) {
             if char == charac{
                 return charac
@@ -103,7 +103,7 @@ public struct Piece : PieceProtocol {
     public init(_ joueur : Int, _ nom : String, _ pos : Position?) {
         self.joueur = joueur
         self.nom = nom
-        if let a = pos { self.pos = a }
+        self.pos = pos
         switch nom {
             case "kodama":
                 self.deplacement = [[1,0]]
@@ -159,19 +159,25 @@ public struct Piece : PieceProtocol {
     func deplacementPossible(_ position : Position, _ partie : Partie) -> Bool {
         //A compléter
         if let a = position.correspondance {
-            if ((a[0] <= 4) || (a[1] <= 4) || (a[0] >= 0) || (a[1] >= 0) || (partie.piecePosition(position) != nil) || (partie.piecePosition(position).joueur != partie.joueurActif())) {
-                var depl : [Int] = [self.pos.correspondance[0] - position.correspondance[0], self.pos.correspondance[1] - position.pos.correspondance[1]]
-                for i in self.deplacement {
-                    if (depl == i) {
-                        return true
+            if (a[0] <= 4) && (a[1] <= 4) && (a[0] >= 0) && (a[1] >= 0){
+                if let b = partie.piecePosition(position) {
+                    if b.joueurPiece() != partie.joueurActif() {
+                        if let c = self.pos {
+                            if let d = c.correspondance {
+                                let depl : [Int] = [d[0] - a[0], d[1] - a[1]]
+                                for i in self.deplacement {
+                                    if (depl == i) {
+                                        return true
+                                    }
+                                }
+                            }
+                        }
+                        
                     }
                 }
-            }
-            return false
+            }                
         }
-        else {
-            return false
-        }
+        return false
     }
 
     //deplacer : Piece x Position -> Piece
@@ -179,14 +185,12 @@ public struct Piece : PieceProtocol {
     //si la case est occupée par un ennemi, faire capturer de la piece de l'ennemi
     //Pré : déplacementPossible(Piece,Position)=True
     //Post : Renvoi la piece avec sa nouvelle position
-    mutating func deplacer(position : Position, _ partie : Partie) {
-        if (partie.piecePosition(position) == nil) || (deplacementPossible(position, partie) && !(partie.piecePosition(position).position)) {
-            self.pos.char = position.char
-            self.pos.correspondance = position.correspondance
-
-        }
-        else if (deplacementPossible(position, partie)) {
-            partie.piecePosition(position).capturer()
+    mutating func deplacer(_ pos : Position, _ partie : Partie) {
+        if deplacementPossible(pos, partie) {
+            self.pos = pos                                
+            if var a = partie.piecePosition(pos) {
+                a.capturer()
+            }                                            
         }
     }
 
@@ -196,8 +200,7 @@ public struct Piece : PieceProtocol {
     //Post : Position(piece) -> Vide
     //si "kodama samourai" capturé, il redevient "kodama"
     mutating func capturer() {
-        self.pos.char = nil
-        self.pos.correspondance = nil
+        self.pos = nil
         self.joueur = Partie.joueurActif()
         if (self.nom == "kodama samourai") {
             self.nom = "kodama"
@@ -209,10 +212,7 @@ public struct Piece : PieceProtocol {
     //Pré : piece existente et dans la réserve et position sur le plateau
     //Post : piece existente sur plateau
     mutating func parachuter(position : Position) {
-        if self.testChar(position.char, "abcdefghijkl") {
-            self.pos.char = position.char
-            self.pos.correspondance = position.correspondance
-        }
+        self.pos = position
     }
 
     //estDansZoneAdverse : Piece -> Bool
@@ -221,10 +221,25 @@ public struct Piece : PieceProtocol {
     //Post : True si la piece est dans la zone adverse, False sinon
     func estDansZoneAdverse() -> Bool {
         if self.joueur == 1 {
-            return self.testChar(self.pos.char, "ghijkl")
-        }
-        else {
-            return self.testChar(self.pos.char, "abcdef")
+            if let a = self.pos {
+                if let b = a.getposcharacter() {
+                    if self.testChar(b, "ghijkl") != nil {
+                        return true
+                    } else {
+                        return false
+                    }                   
+                } 
+            }
+        } else {
+            if let a = self.pos {
+                if let b = a.getposcharacter() {
+                    if self.testChar(b, "abcdef") != nil {
+                        return true
+                    } else {
+                        return false
+                    }                   
+                } 
+            }            
         }
     }
 
@@ -233,7 +248,7 @@ public struct Piece : PieceProtocol {
     //pré: nom(piece)="kodama" et position(piece)!=Vide
     //Post: nom(piece)=kodama samouraï
     mutating func transformation() {
-        if self.nom == "kodama" && self.pos.char != nil {
+        if self.nom == "kodama" && self.pos != nil {
             self.nom = "kodama samourai"
         }
     }
