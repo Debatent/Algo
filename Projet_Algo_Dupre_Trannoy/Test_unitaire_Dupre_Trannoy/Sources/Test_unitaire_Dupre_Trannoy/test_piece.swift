@@ -1,19 +1,20 @@
 import Library_Dupre_Trannoy
 
-func joueurPieceTest() -> String{
-    var piece1 : Piece = Piece(1, "kitsune", "a")
-    var piece2 : Piece = Piece(2, "kitsune", "a")
-    var piece3 : Piece = Piece(3, "kitsune", "a")
-    var retour1 = piece1.joueurPiece()
-    var retour2 = piece2.joueurPiece()
-    var retour3 = piece3.joueurPiece()
+func joueurPieceTest() -> Int{
+    let piece1 : Piece = Piece(1, "kitsune", Position("a"))
+    let piece2 : Piece = Piece(2, "kitsune", Position("a"))
+    let piece3 : Piece = Piece(3, "kitsune", Position("a"))
+    let retour1 = piece1.joueurPiece()
+    let retour2 = piece2.joueurPiece()
+    let retour3 = piece3.joueurPiece()
+    var nberreur: Int = 0
 
     if (retour1 == 1) || (retour1 == 2) {
         print("Le test joueurPiece est passé")
     }
     else{
         print("Le test joueurPiece n'est pas passé")
-        nberreur=nberreur+1
+        nberreur = nberreur + 1
     }
 
     if (retour2 == 1) || (retour2 == 2) {
@@ -21,38 +22,40 @@ func joueurPieceTest() -> String{
     }
     else{
         print("Le test joueurPiece n'est pas passé")
-        nberreur=nberreur+1
+        nberreur = nberreur + 1
     }
 
     if (retour3 == 1) || (retour3 == 2) {
         print("Le test joueurPiece n'est pas passé")
-        nberreur=nberreur+1
+        nberreur = nberreur + 1
     }
     else{
         print("Le test joueurPiece est passé")
     }
+    return nberreur
 }
 
-func nomPieceTest() -> String{
-    var piece1 : Piece = Piece(1, "kodama", "a")
-    var retour1 = piece1.nomPiece()
-    var piece2 : Piece = Piece(1, "kitsune", "a")
-    var retour2 = piece2.nomPiece()
-    var piece3 : Piece = Piece(1, "kodama samourai", "a")
-    var retour3 = piece3.nomPiece()
-    var piece4 : Piece = Piece(1, "koropokkuru", "a")
-    var retour4 = piece4.nomPiece()
-    var piece5 : Piece = Piece(1, "tanuki", "a")
-    var retour5 = piece5.nomPiece()
-    var piece6 : Piece = Piece(1, "inexistant", "a")
-    var retour6 = piece6.nomPiece()
+func nomPieceTest() -> Int{
+    let piece1 : Piece = Piece(1, "kodama", Position("a"))
+    let retour1 = piece1.nomPiece()
+    let piece2 : Piece = Piece(1, "kitsune", Position("a"))
+    let retour2 = piece2.nomPiece()
+    let piece3 : Piece = Piece(1, "kodama samourai", Position("a"))
+    let retour3 = piece3.nomPiece()
+    let piece4 : Piece = Piece(1, "koropokkuru", Position("a"))
+    let retour4 = piece4.nomPiece()
+    let piece5 : Piece = Piece(1, "tanuki", Position("a"))
+    let retour5 = piece5.nomPiece()
+    let piece6 : Piece = Piece(1, "inexistant", Position("a"))
+    let retour6 = piece6.nomPiece()
+    var nberreur: Int = 0
 
     if (retour1 != "kodama") || (retour1 != "kitsune") || (retour1 != "kodama samourai") || (retour1 != "koropokkuru") || (retour1 != "tanuki"){
         print("Le test nomPiece est passé")
     }
     else{
         print("Le test nomPiece n'est pas passé")
-        nberreur+=1
+        nberreur += 1
     }
 
     if (retour2 != "kodama") || (retour2 != "kitsune") || (retour2 != "kodama samourai") || (retour2 != "koropokkuru") || (retour2 != "tanuki"){
@@ -60,7 +63,7 @@ func nomPieceTest() -> String{
     }
     else{
         print("Le test nomPiece n'est pas passé")
-        nberreur+=1
+        nberreur += 1
     }
 
     if (retour3 != "kodama") || (retour3 != "kitsune") || (retour3 != "kodama samourai") || (retour3 != "koropokkuru") || (retour3 != "tanuki"){
@@ -68,7 +71,7 @@ func nomPieceTest() -> String{
     }
     else{
         print("Le test nomPiece n'est pas passé")
-        nberreur+=1
+        nberreur += 1
     }
 
     if (retour4 != "kodama") || (retour4 != "kitsune") || (retour4 != "kodama samourai") || (retour4 != "koropokkuru") || (retour4 != "tanuki"){
@@ -76,7 +79,7 @@ func nomPieceTest() -> String{
     }
     else{
         print("Le test nomPiece n'est pas passé")
-        nberreur+=1
+        nberreur += 1
     }
 
     if (retour5 != "kodama") || (retour5 != "kitsune") || (retour5 != "kodama samourai") || (retour5 != "koropokkuru") || (retour5 != "tanuki"){
@@ -84,60 +87,74 @@ func nomPieceTest() -> String{
     }
     else{
         print("Le test nomPiece n'est pas passé")
-        nberreur+=1
-    }
+        nberreur += 1
+    } 
 
     if (retour6 != "kodama") || (retour6 != "kitsune") || (retour6 != "kodama samourai") || (retour6 != "koropokkuru") || (retour6 != "tanuki"){
         print("Le test nomPiece n'est pas passé")
-        nberreur+=1
+        nberreur += 1
     }
     else{
         print("Le test nomPiece est passé")
     }
+    return nberreur
 }
 
-func positionPieceTest() -> Position{
-    var piece1 : Piece = Piece(1, "kodama", "e")
-    var retour1 = piece1.positionPiece()
-    var piece2 : Piece = Piece(1, "kodama", "z")
-    var retour2 = piece2.positionPiece()
+func positionPieceTest() -> Int{
+    let piece1 : Piece = Piece(1, "kodama", Position("e"))
+    let retour1 = piece1.positionPiece()
+    let piece2 : Piece = Piece(1, "kodama", Position("z"))
+    let retour2 = piece2.positionPiece()
+    var nberreur: Int = 0
 
     for char in ("abcdefjkl"){
-        if char == Character(retour1){
-            print("Le test positionPiece est passé")
-        }
-        else{
-            print("Le test positionPiece n'est pas passé")
-            nberreur+=1
-        }
+	if let a = retour1 {
+	    if let b = a.getposcharacter() {
+	        if char == b{
+                    print("Le test positionPiece est passé")
+                }
+                else{
+                    print("Le test positionPiece n'est pas passé")
+                    nberreur += 1
+                }
+    	    }	    
+	}        
     }
 
     for char in ("abcdefjkl"){
-        if char == Character(retour2){nberreur+=1
-            print("Le test positionPiece n'est pas passé")
-            nberreur+=1
-        }
-        else{
-            print("Le test positionPiece est passé")
-        }
+	if let a = retour2 {
+	    if let b = a.getposcharacter() {
+	        if char == b{
+                    print("Le test positionPiece n'est pas passé")
+                    nberreur += 1
+                }
+                else{
+                    print("Le test positionPiece est passé")
+                }
+    	    } 
+	} 
     }
+
+    return nberreur
 }
 
-func deplacementPossibleTest(position : Position) -> Bool{
-    var piece1 : Piece = Piece(1, "koropokkuru", "e")
-    var pos1 : Position = "d"
-    var retour1 = piece1.deplacementPossible(pos1)
-    var pos2 : Position = "l"
-    var retour2 = piece1.deplacementPossible(pos2)
-    var pos3 : Position = "z"
-    var retour3 = piece1.deplacementPossible(pos2)
+func deplacementPossibleTest() -> Int{
+    let partie : Partie = Partie()
+    let piece1 : Piece = Piece(1, "koropokkuru", Position("e"))
+    let pos1 : Position = Position("d")
+    let retour1 = piece1.deplacementPossible(pos1, partie)
+    let pos2 : Position = Position("l")
+    let retour2 = piece1.deplacementPossible(pos2, partie)
+    let pos3 : Position = Position("z")
+    let retour3 = piece1.deplacementPossible(pos3, partie)
+    var nberreur: Int = 0
 
     if retour1{
         print("Le test deplacementPossible est passé")
     }
     else{
         print("Le test deplacementPossible n'est pas passé")
-            nberreur+=1
+            nberreur += 1
     }
 
     if !retour2{
@@ -145,7 +162,7 @@ func deplacementPossibleTest(position : Position) -> Bool{
     }
     else{
         print("Le test deplacementPossible n'est pas passé")
-            nberreur+=1
+            nberreur += 1
     }
 
     if !retour3{
@@ -153,107 +170,135 @@ func deplacementPossibleTest(position : Position) -> Bool{
     }
     else{
         print("Le test deplacementPossible n'est pas passé")
-            nberreur+=1
+            nberreur += 1
     }
+    return nberreur
 }
 
-func deplacerTest(position : Position){
-    var piece1 : Piece = Piece(1, "koropokkuru", "e")
-    var pos1 : Position = "d"
-    var retour1 = piece1.deplacer(position : pos1)
-    var piece2 : Piece = Piece(1, "koropokkuru", "e")
-    var pos2 : Position = "z"
-    var retour2 = piece1.deplacer(position : pos2)
+func deplacerTest() -> Int{
+    let partie: Partie = Partie()
+    var piece1 : Piece = Piece(1, "koropokkuru", Position("e"))
+    let res1 : Piece = Piece(1, "koropokkuru", Position("d"))
+    let pos1 : Position = Position("d")
+    piece1.deplacer(pos1, partie)
+    var piece2 : Piece = Piece(1, "koropokkuru", Position("e"))
+    let pos2 : Position = Position("z")
+    let res2 : Piece = Piece(1, "koropokkuru", Position("z"))
+    piece2.deplacer(pos2, partie)
+    var nberreur: Int = 0
 
-    if retour1 == Piece(1, "koropokkuru", "d"){
-        print ("Le test deplacer() est passé")
-    }
-    else{
-        print("Le test deplacer() n'est pas passé")
-        nberreur+=1
-    }
-
-    if retour2 == Piece(1, "koropokkuru", "z"){
-        print ("Le test deplacer() n'est pas passé")
-        nberreur+=1
-    }
-    else{
-        print("Le test deplacer() est passé")
-    }
+    if let a = piece1.positionPiece() , let c = res1.positionPiece() {
+		if let b = a.getposcharacter() , let d = c.getposcharacter() {
+			if b == d {
+			    print ("Le trest deplacer() est passé")
+			} else {
+				print("Le test deplacer() n'est pas passé")
+				nberreur += 1
+    		}
+		}
+	}
+    
+   
+    if let a = piece2.positionPiece() , let c = res2.positionPiece() {
+		if let b = a.getposcharacter() , let d = c.getposcharacter() {
+			if b == d {
+				print("Le test deplacer() n'est pas passé")
+				nberreur += 1
+			} else {
+				print("Le test deplacer() est passé")
+    		}
+		}
+    } 
+    return nberreur
 }
 
-func capturerTest(){
-    var piece1 : Piece = Piece(1, "kodama", "a")
-    var retour1 = piece1.capturer()
-    var piece2 : Piece = Piece(1, "kodama samourai", "a")
-    var retour2 = piece2.capturer()
+func capturerTest() -> Int{
+    let partie: Partie = Partie()
+    var piece1 : Piece = Piece(1, "kodama", Position("a"))
+    piece1.capturer(partie)
+    var piece2 : Piece = Piece(1, "kodama samourai", Position("a"))
+    piece2.capturer(partie)
     var piece3 : Piece = Piece(1, "kitsune", nil)
-    var retour3 = piece3.capturer()
+    piece3.capturer(partie)
+	let res: Piece = Piece(2, "kodama", nil)
+    var nberreur: Int = 0
 
-    if (retour1 == Piece(2, "kodama", nil)){
-        print("Le test capturer() est passé")
-    }
-    else{
-        print("Le test capturer() n'est pas passé")
-        nberreur+=1
-    }
+    if piece1.joueurPiece() == res.joueurPiece() && piece1.nomPiece() == res.nomPiece() {
+		if let _ = piece1.positionPiece(), let _ = res.positionPiece() {
+			print("Le test capturer() n'est pas passé")
+       		nberreur += 1
+		} else {
+			print("Le test capturer() est passé")
+		}
+	}
 
-    if (retour2 == Piece(2, "kodama", nil)){
-        print("Le test capturer() est passé")
-    }
-    else{
-        print("Le test capturer() n'est pas passé")
-        nberreur+=1
-    }
+	if piece2.joueurPiece() == res.joueurPiece() && piece2.nomPiece() == res.nomPiece() {
+		if let _ = piece2.positionPiece(), let _ = res.positionPiece() {
+			print("Le test capturer() n'est pas passé")
+       		nberreur += 1
+		} else {
+			print("Le test capturer() est passé")
+		}
+	}
+    
 
-    if (retour2 == Piece(2, "kodama", nil)){
-        print("Le test capturer() n'est pas passé")
-        nberreur+=1
-    }
-    else{
-        print("Le test capturer() est passé")
-    }
+	if piece3.joueurPiece() == res.joueurPiece() && piece3.nomPiece() == "kitsune" {
+		if let _ = piece2.positionPiece(), let _ = res.positionPiece() {
+			print("Le test capturer() n'est pas passé")
+       		nberreur += 1
+		} else {
+			print("Le test capturer() est passé")
+		}
+	}
+
+    return nberreur
 }
 
-func parachuterTest(){
+func parachuterTest() -> Int{
     var piece1 : Piece = Piece(1, "kodama", nil)
-    var pos1 : Position = "d"
-    var retour1 = piece1.parachuter(position : pos1)
+    let pos1 : Position = Position("d")
+    piece1.parachuter(pos1)
     var piece2 : Piece = Piece(1, "kodama", nil)
-    var pos2 : Position = "z"
-    var retour2 = piece1.parachuter(position : pos2)
+    let pos2 : Position = Position("z")
+    piece2.parachuter(pos2)
+    var nberreur: Int = 0
 
-    if (retour1 == Piece(1, "kodama", "d")){
-        print ("Le test parachuter() est passé")
-    }
-    else{
-        print("Le test parachuter() n'est pas passé")
-        nberreur+=1
-    }
+	if let a = piece1.positionPiece() {
+		if let b = a.getposcharacter() {
+			if b == "d" {
+				print ("Le test parachuter() est passé")			
+			} else {
+		   		print("Le test parachuter() n'est pas passé")
+		    	nberreur += 1
+   			 }
+		} 
+	}
 
-    if (retour2 == Piece(1, "kodama", "z")){
-        print ("Le test parachuter() n'est pas passé")
-        nberreur+=1
-    }
-    else{
-        print("Le test parachuter() est passé")
-    }
+	if let _ = piece2.positionPiece() {
+		print ("Le test parachuter() n'est pas passé")
+        nberreur += 1
+	} else {
+		print("Le test parachuter() est passé")
+	}
+
+    return nberreur
 }
 
-func estDansZoneAdverseTest() -> Bool{
-    var piece1 : Piece = Piece(1, "kodama", "k")
-    var retour1 = piece1.estDansZoneAdverse()
-    var piece2 : Piece = Piece(1, "kodama", "a")
-    var retour2 = piece2.estDansZoneAdverse()
-    var piece3 : Piece = Piece(1, "kodama", "z")
-    var retour3 = piece2.estDansZoneAdverse()
+func estDansZoneAdverseTest() -> Int{
+    let piece1 : Piece = Piece(1, "kodama", Position("k"))
+    let retour1 = piece1.estDansZoneAdverse()
+    let piece2 : Piece = Piece(1, "kodama", Position("a"))
+    let retour2 = piece2.estDansZoneAdverse()
+    let piece3 : Piece = Piece(1, "kodama", Position("z"))
+    let retour3 = piece3.estDansZoneAdverse()
+    var nberreur: Int = 0
 
     if retour1{
         print("Le test estDansZoneAdverse() est passé")
     }
     else{
         print ("Le test estDansZoneAdverse() n'est pas passé")
-        nberreur+=1
+        nberreur += 1
     }
 
     if !retour2{
@@ -261,7 +306,7 @@ func estDansZoneAdverseTest() -> Bool{
     }
     else{
         print ("Le test estDansZoneAdverse() n'est pas passé")
-        nberreur+=1
+        nberreur += 1
     }
 
     if !retour3{
@@ -269,41 +314,44 @@ func estDansZoneAdverseTest() -> Bool{
     }
     else{
         print ("Le test estDansZoneAdverse() n'est pas passé")
-        nberreur+=1
+        nberreur += 1 
     }
+    return nberreur
 }
 
-func transformationTest() -> Bool{
-    var piece1 : Piece = Piece(1, "kodama", "l")
-    var retour1 = piece1.transformation()
-    var piece2 : Piece = Piece(1, "kitsune", "l")
-    var retour2 = piece2.transformation()
-    var piece3 : Piece = Piece(1, "kodama", "a")
-    var retour3 = piece3.transformation()
+func transformationTest() -> Int{
+    var piece1 : Piece = Piece(1, "kodama", Position("l"))
+    piece1.transformation()
+    var piece2 : Piece = Piece(1, "kitsune", Position("l"))
+    piece2.transformation()
+    var piece3 : Piece = Piece(1, "kodama", nil)
+    piece3.transformation()
+    var nberreur: Int = 0
 
-    if retour1 == Piece(1, "kodama samourai", "l"){
+    if piece1.nomPiece() == "kodama samourai" {
         print("Le test transformation() est passé")
     }
-    else{
+    else {
         print ("Le test transformation() n'est pas passé")
-        nberreur+=1
+        nberreur += 1
     }
 
-    if retour2 == Piece(1, "kodama samourai", "l"){
+    if piece2.nomPiece() == "kodama samourai" {
         print("Le test transformation() n'est pas passé")
-        nberreur+=1
+        nberreur += 1
     }
     else{
         print ("Le test transformation() est passé")
     }
 
-    if retour3 == Piece(1, "kodama samourai", "a"){
+    if piece3.nomPiece() == "kodama samourai" {
         print("Le test transformation() n'est pas passé")
-        nberreur+=1
+        nberreur += 1
     }
     else{
         print ("Le test transformation() est passé")
     }
+    return nberreur
 }
 
 /*
