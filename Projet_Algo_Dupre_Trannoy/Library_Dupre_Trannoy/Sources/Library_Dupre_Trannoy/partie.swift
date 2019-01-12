@@ -63,17 +63,17 @@ public protocol PartieProtocol: Sequence{
 
 
 
-struct Partie: PartieProtocol{
-    typealias piece = Piece
-    typealias position = Position
-    typealias iteratorpartie = IteratorPartie
+public struct Partie: PartieProtocol{
+    public typealias piece = Piece
+    public typealias position = Position
+    public typealias iteratorpartie = IteratorPartie
     private var quijoue: Int
     var pieceplateau:[Piece]
 
 
     //init : -> Partie
     //creation de la partie, une partie est une collection de pieces
-    init(){
+    public init(){
         self.quijoue = 1
         self.pieceplateau = [Piece(1, "kitsune", Position("a")),
         Piece(1, "koropokkuru", Position("b")), Piece(1, "tanuki", Position("c")),
@@ -88,7 +88,7 @@ struct Partie: PartieProtocol{
     //Post : renvoie 1 si la partie est gagnee par le joueur 1; 2 si elle est gagnee par le joueur 2
     //la partie est gagnee si un roi est dans la reserve ou si un roi est dans la zone adverse depuis plus d'un tour
     //Post : renvoie Vide si la partie n'est pas gagnee, sinon 1 ou 2 selon qui a gagnee
-    func partieGagnee() -> Int?{
+    public func partieGagnee() -> Int?{
         var comp1 = 0
         var comp2 = 0
         var it = self.makeIterator()
@@ -117,7 +117,7 @@ struct Partie: PartieProtocol{
     //précise si une case donnée est occupée ou vide
     //Pré : position existente sur le plateau
     //Post : renvoie True si case vide, False sinon
-    func caseEstVide(_ pos : Position) -> Bool{
+    public func caseEstVide(_ pos : Position) -> Bool{
         var reponse: Bool = true
         var it = self.makeIterator()
         while let a = it.next(){
@@ -134,7 +134,7 @@ struct Partie: PartieProtocol{
     //fonction qui a une position donnée sur le plateau renvoie la piece correspondante
     //Pre : position sur le plateau du joueur actif
     //Post : renvoie la piece à la position donnée si la piece appartient au joueuractif() sinon Vide si la position n'a pas de piece ou si elle n'appartient pas au joueur actif
-    func piecePosition(_ pos : Position) -> Piece?{
+    public func piecePosition(_ pos : Position) -> Piece?{
         var it = self.makeIterator()
         while let a = it.next(){
             if a.joueurPiece() == self.joueurActif() {
@@ -154,7 +154,7 @@ struct Partie: PartieProtocol{
     //a partir du nom d'une piece dans la reserve renvoie la Piece correspondante
     //Pre : nom d'une piece dans la reserve du joueur actif
     //Post : renvoie la piece avec le nom donné si la piece appartient au joueuractif() sinon Vide si le nom n'a pas de piece dans la reserve ou si elle n'appartient pas au joueur actif
-    func pieceNom(_ nom : String) -> Piece?{
+    public func pieceNom(_ nom : String) -> Piece?{
         var it = self.makeIterator()
         while let a = it.next(){
             if a.nomPiece() == nom{
@@ -170,20 +170,20 @@ struct Partie: PartieProtocol{
     //au premier tour de jeu c'est le joueur 1 qui commence puis a chaque tour ca s'alterne
     //Pre : la partie n'est pas terminee
     //Post : renvoie 1 ou 2
-    func joueurActif() -> Int{
+    public func joueurActif() -> Int{
         return self.quijoue
     }
 
     //listepiece: ->[Piece]
     //Renvoie la liste des pieces de la partie
-    func listepiece() -> [Piece]{
+    public func listepiece() -> [Piece]{
         return self.pieceplateau
     }
 
     //changementJoueur : Int -> Int
     //Pre : joueurActif() = 1 ou 2
     //Post : renvoie 1 si le joueur etait 2 et inversement
-    mutating func changementJoueur(_ joueurActif : Int) -> Int{
+    public mutating func changementJoueur(_ joueurActif : Int) -> Int{
         let a:Int = 3 - self.quijoue
         self.quijoue = a
         return a
@@ -191,7 +191,7 @@ struct Partie: PartieProtocol{
 
     // makeIterator : Partie -> ItPartie
     // crée un itérateur sur le collection pour itérer avec for in. itère sur les positions de la partie.
-    func makeIterator() -> IteratorPartie{
+    public func makeIterator() -> IteratorPartie{
         return IteratorPartie(self)
 
     }
@@ -202,19 +202,19 @@ struct Partie: PartieProtocol{
 
 
 
-struct IteratorPartie: IteratorProtocol{
+public struct IteratorPartie: IteratorProtocol{
     fileprivate let par: Partie
     fileprivate var indice: Int
 
 
 
-    init(_ p: Partie){
+    public init(_ p: Partie){
         self.indice = 0
         self.par = p
     }
 
 
-    mutating func next() -> Piece?{
+    public mutating func next() -> Piece?{
         let a = self.par.listepiece()
         if indice >= a.count{
             return nil

@@ -1,3 +1,5 @@
+import Library_Dupre_Trannoy
+
 func caseEstVideTest(){
     var p : Partie = Partie()
     var pos1 : Position = "c"
@@ -77,10 +79,10 @@ func pieceNomTest(){
     var nberreur = 0
     var partie : Partie = Partie()
     var piece1 : Piece = Piece(1,"kodama",nil)
-    var piece1 : Piece = Piece(1,"kodama","a")
+    var piece2 : Piece = Piece(1,"kodama","a")
     var nom1 : String = "kodama"
-    var nom1 : String = "kitsune"
-    var nom1 : String = "atfef"
+    var nom2 : String = "kitsune"
+    var nom3 : String = "atfef"
     
     if partie.pieceNom(nom : nom1) != piece1{
         print("le test n'est pas passé")
@@ -96,7 +98,7 @@ func pieceNomTest(){
         print("le test est passé")
     }
 
-    if partie.pieceNom(nom : nom3) == piece1{
+    if partie.pieceNom(nom : nom3) == piece2{
         print("le test n'est pas passé")
         nberreur+=1}
     else{

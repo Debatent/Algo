@@ -79,10 +79,10 @@ public protocol PieceProtocol{
 
 //Type Piece(joueur, nom, Position)
 //chaque piece est associee a son joueur, son nom et sa position
-struct Piece : PieceProtocol {
+public struct Piece : PieceProtocol {
 
-    typealias Pos = Position
-    typealias Par = Partie
+    public typealias Pos = Position
+    public typealias Par = Partie
 
     var joueur : Int
     var nom : String
@@ -101,7 +101,7 @@ struct Piece : PieceProtocol {
 
     //init : -> Piece
     //creation des pieces, initialisees avec le joueur auquel il appartient, le nom et la position de la piece
-    init(_ joueur : Int, _ nom : String, _ pos : Position?) {
+    public init(_ joueur : Int, _ nom : String, _ pos : Position?) {
         self.joueur = joueur
         self.nom = nom
         self.pos = pos
@@ -126,7 +126,7 @@ struct Piece : PieceProtocol {
     //retourne le joueur auquel la piece appartient
     //Pre : piece existante
     //Post : retourne le joueur soit 1, soit 2
-    func joueurPiece() -> Int {
+    public func joueurPiece() -> Int {
         return self.joueur
     }
 
@@ -134,7 +134,7 @@ struct Piece : PieceProtocol {
     //retourne le nom d'une piece
     //Pre : piece existante
     //Post : retourne soit koropokkuru, kitsune, tanuki, kodama ou kodama samourai
-    func nomPiece() -> String {
+    public func nomPiece() -> String {
         return self.nom
     }
 
@@ -142,7 +142,7 @@ struct Piece : PieceProtocol {
     //retourne la positon d'une piece
     //Pre : piece existante
     //Post : retourne vide si la piece est dans la reserve, un charactere correspondant a sa position sinon
-    func positionPiece() -> Position? {
+    public func positionPiece() -> Position? {
         return self.pos
     }
 
@@ -158,7 +158,7 @@ struct Piece : PieceProtocol {
     //kodama samurai : Ouest, Nord-Ouest, Nord, Nord-Est, Est, Sud
     //Pre : piece existante et position existante sur le plateau
     //Post : retourne True si deplacement possible, False sinon
-    func deplacementPossible(_ position : Position, _ partie : Partie) -> Bool {
+    public func deplacementPossible(_ position : Position, _ partie : Partie) -> Bool {
         //A compléter
         if let a = position.correspondance {
             if (a[0] <= 4) && (a[1] <= 4) && (a[0] >= 0) && (a[1] >= 0){
@@ -187,7 +187,7 @@ struct Piece : PieceProtocol {
     //si la case est occupée par un ennemi, faire capturer de la piece de l'ennemi
     //Pré : déplacementPossible(Piece,Position)=True
     //Post : Renvoi la piece avec sa nouvelle position
-    mutating func deplacer(_ pos : Position, _ partie : Partie) {
+    public mutating func deplacer(_ pos : Position, _ partie : Partie) {
         if deplacementPossible(pos, partie) {
             self.pos = pos                                
             if var a = partie.piecePosition(pos) {
@@ -201,7 +201,7 @@ struct Piece : PieceProtocol {
     //Pré : Piece existente sur le plateau
     //Post : Position(piece) -> Vide
     //si "kodama samourai" capturé, il redevient "kodama"
-    mutating func capturer(_ partie: Partie) {
+    public mutating func capturer(_ partie: Partie) {
         self.pos = nil
         self.joueur = partie.joueurActif()
         if (self.nom == "kodama samourai") {
@@ -213,7 +213,7 @@ struct Piece : PieceProtocol {
     //place une piece de la réserve sur le plateau
     //Pré : piece existente et dans la réserve et position sur le plateau
     //Post : piece existente sur plateau
-    mutating func parachuter(_ position : Position) {
+    public mutating func parachuter(_ position : Position) {
         self.pos = position
     }
 
@@ -221,7 +221,7 @@ struct Piece : PieceProtocol {
     //savoir si une piece est dans la zone adverse, les 3 cases les plus eloignes de chaque joueurs
     //Pré : piece existente sur plateau
     //Post : True si la piece est dans la zone adverse, False sinon
-    func estDansZoneAdverse() -> Bool {
+    public func estDansZoneAdverse() -> Bool {
         if self.joueur == 1 {
             if let a = self.pos {
                 if let b = a.getposcharacter() {
@@ -247,7 +247,7 @@ struct Piece : PieceProtocol {
     //transforme un kodama en kodama samouraï
     //pré: nom(piece)="kodama" et position(piece)!=Vide
     //Post: nom(piece)=kodama samouraï
-    mutating func transformation() {
+    public mutating func transformation() {
         if self.nom == "kodama" && self.pos != nil {
             self.nom = "kodama samourai"
         }

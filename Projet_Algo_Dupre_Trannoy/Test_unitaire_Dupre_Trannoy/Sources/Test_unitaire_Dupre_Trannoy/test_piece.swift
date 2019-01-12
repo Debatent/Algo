@@ -1,3 +1,5 @@
+import Library_Dupre_Trannoy
+
 func joueurPieceTest() -> String{
     var piece1 : Piece = Piece(1, "kitsune", "a")
     var piece2 : Piece = Piece(2, "kitsune", "a")
@@ -6,7 +8,7 @@ func joueurPieceTest() -> String{
     var retour2 = piece2.joueurPiece()
     var retour3 = piece3.joueurPiece()
 
-    if (retour1 == 1) || (retour1 ==2) {
+    if (retour1 == 1) || (retour1 == 2) {
         print("Le test joueurPiece est passé")
     }
     else{
@@ -14,7 +16,7 @@ func joueurPieceTest() -> String{
         nberreur=nberreur+1
     }
 
-    if (retour2 == 1) || (retour2 ==2) {
+    if (retour2 == 1) || (retour2 == 2) {
         print("Le test joueurPiece est passé")
     }
     else{
@@ -22,7 +24,7 @@ func joueurPieceTest() -> String{
         nberreur=nberreur+1
     }
 
-    if (retour3 == 1) || (retour3 ==2) {
+    if (retour3 == 1) || (retour3 == 2) {
         print("Le test joueurPiece n'est pas passé")
         nberreur=nberreur+1
     }
@@ -157,7 +159,7 @@ func deplacementPossibleTest(position : Position) -> Bool{
 
 func deplacerTest(position : Position){
     var piece1 : Piece = Piece(1, "koropokkuru", "e")
-    var pos1 : Position ="d"
+    var pos1 : Position = "d"
     var retour1 = piece1.deplacer(position : pos1)
     var piece2 : Piece = Piece(1, "koropokkuru", "e")
     var pos2 : Position = "z"
@@ -304,7 +306,7 @@ func transformationTest() -> Bool{
     }
 }
 
-
+/*
 var nberreur : Int = 0
 nberreur+=joueurPieceTest()
 nberreur+=nomPieceTest()
@@ -315,3 +317,4 @@ nberreur+=capturerTest()
 nberreur+=parachuterTest()
 nberreur+=estDansZoneAdverseTest()
 nberreur+=transformationTest()
+*/
