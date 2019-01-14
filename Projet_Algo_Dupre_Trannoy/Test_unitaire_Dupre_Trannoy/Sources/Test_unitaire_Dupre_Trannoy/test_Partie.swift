@@ -1,72 +1,102 @@
 import Library_Dupre_Trannoy
 
-func caseEstVideTest(){
-    var p : Partie = Partie()
-    var pos1 : Position = "c"
-    var pos2 : Position = "z"
-    var pos3 : Position = "b"
-    var piece1 : Piece = Piece(1,"kodama","c")
+func memeposition(_ pos1: Position?,_ pos2: Position?) -> Bool{
+    if pos1 == nil && pos2 == nil{
+        return true
+    }
+    else{
+        if let a = pos1{
+            if let b = a.getposcharacter(){
+                if let c = pos2{
+                    if let d = c.getposcharacter(){
+                        return b == d
+                    }
+                }
+            }
+        }
+        return false
+    }
+}
+
+func memepiece(_ piece1:Piece,_ piece2:Piece) -> Bool{
+    if piece1.nomPiece() == piece2.nomPiece(){
+        if piece1.joueurPiece() == piece2.joueurPiece(){
+            if memeposition(piece1.positionPiece(), piece2.positionPiece()){
+                return true
+            }
+        }
+    }
+    return false
+}
+
+func caseEstVideTest() -> Int{
+    let pos1 : Position = Position("c")
+    let pos2 : Position = Position("z")
+    let pos3 : Position = Position("b")
+    let piece1 : Piece = Piece(1,"kodama",Position("c"))
+    let p : Partie = Partie([piece1])!
     var nberreur = 0
     
-    if p.caseEstVide(position : pos2) == true{
+    if p.caseEstVide(pos2){
         print("le test n'est pas passé")
-            nberreur+=1}
+            nberreur += 1}
     else{
         print("le test est passé")
         }
     
-    if p.caseEstVide(position : pos1) == true{
+    if p.caseEstVide(pos1){
         print("le test est passé")}
     else{
         print("le test n'est pas passé")
-        nberreur+=1
+        nberreur += 1
     }
   
-    if p.caseEstVide(position: pos3) == true{
+    if p.caseEstVide(pos3){
         print("le test est passé")}
     else{
         print("le test n'est pas passé")
-        nberreur+=1
+        nberreur += 1
     }
     return nberreur
 
 }
 
-func piecePositionTest(){
+func piecePositionTest() -> Int{
     var nberreur = 0
-    var partie : Partie = Partie()
-    var pos1 : Position = "a"
-    var pos2 : Position = "b"
-    var pos3 : Position = "z"
-    var pos4 : Position = "c"
-    var piece1 : Piece = Piece(1,"kodama","a")
-    var piece2 : Piece = Piece(2,"kodama","b")
-  
-    if partie.piecePosition(position : pos1) == piece1{
+    let pos1 : Position = Position("a")
+    let pos2 : Position = Position("b")
+    let pos3 : Position = Position("z")
+    let pos4 : Position = Position("c")
+    let piece1 : Piece = Piece(1,"kodama",Position("a"))
+    let piece2 : Piece = Piece(2,"kodama",Position("b"))
+    let partie : Partie = Partie([piece1, piece2])!
+
+
+    if memepiece(partie.piecePosition(pos1)!, piece1){
         print("le test est passé")}
     else{
         print("le test n'est pas passé")
-        nberreur+=1
+        nberreur += 1
     }
    
-    if (partie.piecePosition(position : pos2) == piece2)||(partie.piecePosition(position : pos2) == nil){
+    if memepiece(partie.piecePosition(pos2)!,piece2) || (partie.piecePosition(pos2) == nil){
         print("le test n'est pas passé")
-        nberreur+=1}
+        nberreur += 1}
 
     else{
         print("le test est passé")
     }
  
-    if partie.piecePosition(position : pos3) != nil{
+    if partie.piecePosition(pos3) != nil{
         print("le test n'est pas passé")
-        nberreur+=1}
+        nberreur += 1}
     else{
         print("le test est passé")
     }
 
-    if partie.piecePosition(position : pos4) != nil{
+    if partie.piecePosition(pos4) != nil{
         print("le test n'est pas passé")
-        nberreur+=1}
+        nberreur += 1 }
     else{
         print("le test est passé")
     
@@ -75,42 +105,59 @@ func piecePositionTest(){
     return nberreur
 }
 
-func pieceNomTest(){
+func pieceNomTest() -> Int{
     var nberreur = 0
-    var partie : Partie = Partie()
-    var piece1 : Piece = Piece(1,"kodama",nil)
-    var piece2 : Piece = Piece(1,"kodama","a")
-    var nom1 : String = "kodama"
-    var nom2 : String = "kitsune"
-    var nom3 : String = "atfef"
+    let piece1 : Piece = Piece(1,"kodama",nil)
+    let piece2 : Piece = Piece(1,"kodama",Position("a"))
+    let nom1 : String = "kodama"
+    let nom2 : String = "kitsune"
+    let nom3 : String = "atfef"
+    let partie : Partie = Partie([piece1, piece2])!
+
     
-    if partie.pieceNom(nom : nom1) != piece1{
-        print("le test n'est pas passé")
-        nberreur+=1}
-    else{
-        print("le test est passé")
-    }
+    if let a = partie.pieceNom(nom1){
+        if let b = a.positionPiece(){
+            if b.getposcharacter() != nil{
+                print("le test n'est pas passé")
+                nberreur += 1
+            }
+            else{
+                print("le test est passé")
+            }
+        }
+    } 
+        
 
-    if partie.pieceNom(nom : nom2) != nil{
-        print("le test n'est pas passé")
-        nberreur+=1}
-    else{
-        print("le test est passé")
-    }
 
-    if partie.pieceNom(nom : nom3) == piece2{
-        print("le test n'est pas passé")
-        nberreur+=1}
-    else{
-        print("le test est passé")
-    }
+    if let a = partie.pieceNom(nom2){
+        if let _ = a.positionPiece(){
+            print("le test n'est pas passé")
+            nberreur += 1
+        }
+        else{
+            print("le test est passé")
+            
+        }
+    }   
 
+    if let a = partie.pieceNom(nom3){
+        if let _ = a.positionPiece(){
+            print("le test n'est pas passé")
+            nberreur += 1
+        }
+        else{
+            print("le test est passé")
+            
+        }
+
+    }
+    
     return nberreur
 }
 
-func joueurActifTest(){
+func joueurActifTest() -> Int{
     var nberreur = 0
-    var partie : Partie = Partie()
+    let partie : Partie = Partie()
     if (partie.joueurActif() != 1) || (partie.joueurActif() != 2){
         print("le test n'est pas passé")
         nberreur+=1}
@@ -121,28 +168,28 @@ func joueurActifTest(){
     return nberreur
 }
 
-func changementJoueurTest(){
+func changementJoueurTest() -> Int{
     var nberreur = 0
     var partie : Partie = Partie()
-    var joueur1 : Int = 1
-    var joueur2 : Int = 2
-    var joueur3 : Int = 3
+    let joueur1 : Int = 1
+    let joueur2 : Int = 2
+    let joueur3 : Int = 3
 
-    if partie.changementJoueur(joueurActif : joueur1) != 2{
+    if partie.changementJoueur(joueur1) != 2{
         print("le test n'est pas passé")
         nberreur+=1}
     else{
         print("le test est passé")
     }
 
-    if partie.changementJoueur(joueurActif : joueur2) != 1{
+    if partie.changementJoueur(joueur2) != 1{
         print("le test n'est pas passé")
         nberreur+=1}
     else{
         print("le test est passé")
     }
 
-    if (partie.changementJoueur(joueurActif : joueur3) == 1) || (partie.changementJoueur(joueurActif : joueur3) == 2){
+    if (partie.changementJoueur(joueur3) == 1) || (partie.changementJoueur(joueur3) == 2){
         print("le test n'est pas passé")
         nberreur+=1
     }
