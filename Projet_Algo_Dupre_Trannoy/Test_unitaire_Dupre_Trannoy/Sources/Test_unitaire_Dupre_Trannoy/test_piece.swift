@@ -50,7 +50,7 @@ func nomPieceTest() -> Int{
     let retour6 = piece6.nomPiece()
     var nberreur: Int = 0
 
-    if (retour1 != "kodama") || (retour1 != "kitsune") || (retour1 != "kodama samourai") || (retour1 != "koropokkuru") || (retour1 != "tanuki"){
+    if (retour1 == "kodama") {
         print("Le test nomPiece est passé")
     }
     else{
@@ -58,7 +58,7 @@ func nomPieceTest() -> Int{
         nberreur += 1
     }
 
-    if (retour2 != "kodama") || (retour2 != "kitsune") || (retour2 != "kodama samourai") || (retour2 != "koropokkuru") || (retour2 != "tanuki"){
+    if (retour2 == "kitsune") {
         print("Le test nomPiece est passé")
     }
     else{
@@ -66,7 +66,7 @@ func nomPieceTest() -> Int{
         nberreur += 1
     }
 
-    if (retour3 != "kodama") || (retour3 != "kitsune") || (retour3 != "kodama samourai") || (retour3 != "koropokkuru") || (retour3 != "tanuki"){
+    if (retour3 == "kodama samourai") {
         print("Le test nomPiece est passé")
     }
     else{
@@ -74,7 +74,7 @@ func nomPieceTest() -> Int{
         nberreur += 1
     }
 
-    if (retour4 != "kodama") || (retour4 != "kitsune") || (retour4 != "kodama samourai") || (retour4 != "koropokkuru") || (retour4 != "tanuki"){
+    if (retour4 == "koropokkuru") {
         print("Le test nomPiece est passé")
     }
     else{
@@ -82,7 +82,7 @@ func nomPieceTest() -> Int{
         nberreur += 1
     }
 
-    if (retour5 != "kodama") || (retour5 != "kitsune") || (retour5 != "kodama samourai") || (retour5 != "koropokkuru") || (retour5 != "tanuki"){
+    if (retour5 == "tanuki"){
         print("Le test nomPiece est passé")
     }
     else{
@@ -90,12 +90,12 @@ func nomPieceTest() -> Int{
         nberreur += 1
     } 
 
-    if (retour6 != "kodama") || (retour6 != "kitsune") || (retour6 != "kodama samourai") || (retour6 != "koropokkuru") || (retour6 != "tanuki"){
-        print("Le test nomPiece n'est pas passé")
-        nberreur += 1
+    if (retour6 != "kodama") && (retour6 != "kitsune") && (retour6 != "kodama samourai") && (retour6 != "koropokkuru") && (retour6 != "tanuki"){
+        print("Le test nomPiece est passé")
     }
     else{
-        print("Le test nomPiece est passé")
+        print("Le test nomPiece n'est pas passé")
+        nberreur += 1
     }
     return nberreur
 }
@@ -106,42 +106,41 @@ func positionPieceTest() -> Int{
     let piece2 : Piece = Piece(1, "kodama", Position("z"))
     let retour2 = piece2.positionPiece()
     var nberreur: Int = 0
+    var bool : Bool = false
 
     for char in ("abcdefjkl"){
 	if let a = retour1 {
 	    if let b = a.getposcharacter() {
 	        if char == b{
-                    print("Le test positionPiece est passé")
-                }
-                else{
-                    print("Le test positionPiece n'est pas passé")
-                    nberreur += 1
+		    bool = true
                 }
     	    }	    
 	}        
     }
 
-    for char in ("abcdefjkl"){
-	if let a = retour2 {
-	    if let b = a.getposcharacter() {
-	        if char == b{
-                    print("Le test positionPiece n'est pas passé")
-                    nberreur += 1
-                }
-                else{
-                    print("Le test positionPiece est passé")
-                }
-    	    } 
-	} 
+    if bool {
+        print("Le test positionPiece est passé")
+    } else {
+	print("Le test positionPiece n'est pas passé")
+	nberreur += 1        
     }
 
+
+    if let a = retour2 {
+	if let _ = a.getposcharacter() {
+            print("Le test positionPiece n'est pas passé")
+            nberreur += 1   
+	} else {
+	    print("Le test positionPiece est passé")
+        }
+    }
     return nberreur
 }
 
 func deplacementPossibleTest() -> Int{
     let partie : Partie = Partie()
     let piece1 : Piece = Piece(1, "koropokkuru", Position("e"))
-    let pos1 : Position = Position("d")
+    let pos1 : Position = Position("i")
     let retour1 = piece1.deplacementPossible(pos1, partie)
     let pos2 : Position = Position("l")
     let retour2 = piece1.deplacementPossible(pos2, partie)
@@ -190,7 +189,7 @@ func deplacerTest() -> Int{
     if let a = piece1.positionPiece() , let c = res1.positionPiece() {
 		if let b = a.getposcharacter() , let d = c.getposcharacter() {
 			if b == d {
-			    print ("Le trest deplacer() est passé")
+			    print ("Le test deplacer() est passé")
 			} else {
 				print("Le test deplacer() n'est pas passé")
 				nberreur += 1
@@ -269,14 +268,14 @@ func parachuterTest() -> Int{
 				print ("Le test parachuter() est passé")			
 			} else {
 		   		print("Le test parachuter() n'est pas passé")
-		    	nberreur += 1
+		    	        nberreur += 1
    			 }
 		} 
 	}
 
 	if let _ = piece2.positionPiece() {
 		print ("Le test parachuter() n'est pas passé")
-        nberreur += 1
+      	        nberreur += 1
 	} else {
 		print("Le test parachuter() est passé")
 	}
@@ -365,4 +364,5 @@ nberreur+=capturerTest()
 nberreur+=parachuterTest()
 nberreur+=estDansZoneAdverseTest()
 nberreur+=transformationTest()
+print(nberreur)
 */

@@ -113,7 +113,9 @@ public struct Piece : PieceProtocol {
             case "kitsune":
                 self.deplacement = [[1,1], [1,-1], [-1, -1], [-1, 1]]
             case "kodama samourai":
-                self.deplacement = [[0,1], [-1,1], [-1,0], [0, -1], [1, -1], [1,0], [1,1], [-1, -1]]
+                self.deplacement = [[0,1], [-1,0], [0, -1], [1, -1], [1,0], [1,1]]
+	    case "tanuki":
+		self.deplacement = [[1,0], [0,1], [0,-1], [-1,0]]
             default:
                 self.deplacement = [[0,0]]
 
@@ -161,22 +163,30 @@ public struct Piece : PieceProtocol {
     public func deplacementPossible(_ position : Position, _ partie : Partie) -> Bool {
         //A compléter
         if let a = position.correspondance {
-            if (a[0] <= 4) && (a[1] <= 4) && (a[0] >= 0) && (a[1] >= 0){
+            if (a[0] <= 3) && (a[1] <= 3) && (a[0] >= 0) && (a[1] >= 0){
                 if let b = partie.piecePosition(position) {
                     if b.joueurPiece() != partie.joueurActif() {
                         if let c = self.pos {
                             if let d = c.correspondance {
-                                let depl : [Int] = [d[0] - a[0], d[1] - a[1]]
+                                let depl : [Int] = [a[0] - d[0], a[1] - d[1]]
                                 for i in self.deplacement {
                                     if (depl == i) {
                                         return true
                                     }
                                 }
                             }
-                        }
-                        
+                        }             
                     }
-                }
+                } else if let c = self.pos {
+		    if let d = c.correspondance {
+			let depl : [Int] = [a[0] - d[0], a[1] - d[1]]
+			for i in self.deplacement {
+			    if (depl == i) {
+				return true
+			    }
+			}
+		    } 
+		}
             }                
         }
         return false
@@ -214,7 +224,11 @@ public struct Piece : PieceProtocol {
     //Pré : piece existente et dans la réserve et position sur le plateau
     //Post : piece existente sur plateau
     public mutating func parachuter(_ position : Position) {
-        self.pos = position
+	for char in "abcdefghijkl" {
+	    if position.getposcharacter() == char {
+		self.pos = position
+	    }
+	}
     }
 
     //estDansZoneAdverse : Piece -> Bool
