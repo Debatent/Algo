@@ -10,6 +10,10 @@ public protocol PartieProtocol: Sequence{
     //creation de la partie, une partie est une collection de pieces
     init()
 
+    //init : [Piece]-> Partie
+    // Initialise la partie avec les piee en parametre
+    init?([_ listepiece:piece])
+    
     //partieGagnee : -> (Int | Vide)
     //savoir si la partie est gagnee et par qui
     //Pre : la partie n'est pas gagnee
@@ -81,6 +85,11 @@ public struct Partie: PartieProtocol{
         Piece(2, "tanuki", Position("j")), Piece(2, "koropokkuru", Position("k")), Piece(2, "kitsune", Position("l")),
         Piece(1, "kodoma samourai", nil), Piece(2, "kodoma samourai", nil)]
     }
+    //init : [Piece]-> Partie
+    // Initialise la partie avec les piee en parametre
+    public init?([_ listepiece: Piece]){
+        self.quijoue = 1
+        self.pieceplateau = listepiece
 
     //partieGagnee : -> (Int | Vide)
     //savoir si la partie est gagnee et par qui
